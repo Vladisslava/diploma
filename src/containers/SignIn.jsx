@@ -45,13 +45,10 @@ render() {
                     </div>
                 
                     <div className="registration_input wr-button wr-button__white">
-                          <Link to="/home"> 
-                             <button className="button" onClick={this.signIn} type="button">Войти</button>
-                        </Link>
+                       
                         
-                        <button className="button" onClick={this.signIn} type="button">Войти</button>
+                        <button className="button" type="submit">Войти</button>
                     </div> 
-                    <input type="submit" name="submit" value="Войти"/>
                     
                     <div className="registration_login">
                         Ещё не зарегистрированы? 
