@@ -55,7 +55,7 @@ class SignUp extends React.Component{
                     </div>
                 
                     <div className="registration_input wr-button wr-button__white">
-                        <button type="submit" >Зарегистрироваться</button>
+                        <button className="button" type="submit" >Зарегистрироваться</button>
                        
                     </div> 
                     
