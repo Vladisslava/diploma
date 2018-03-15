@@ -23,6 +23,8 @@ import BoxCreate from "./containers/BoxCreate.jsx";
 import MyBoxes from "./containers/MyBoxes.jsx";
 import Favourite from "./containers/Favourite.jsx";
 import Rules from "./containers/Rules.jsx";
+import Logout from "./containers/Logout.jsx";
+import Menu from "./components/Menu";
 
 const history = createHistory();
 const store = configureStore(history);
@@ -34,15 +36,17 @@ ReactDOM.render([
                 <PrivateRoute exact path='/' component={App}/>
                 <Route path='/signup' component={SignUp}/>
                 <Route path='/signin' component={SignIn}/>
-                <Route path='/home' component={Home}/>
-                <Route path='/box' component={Box}/>
-                <Route path='/boxpass' component={BoxPass}/>
-                <Route path='/boxperson' component={BoxPerson}/>
-                <Route path='/profile' component={Profile}/>
-                <Route path='/boxcreate' component={BoxCreate}/>
-                <Route path='/myboxes' component={MyBoxes}/>
-                <Route path='/favourite' component={Favourite}/>
-                <Route path='/rules' component={Rules}/>
+                <PrivateRoute path='/home' component={Home}/>
+                <PrivateRoute path='/box' component={Box}/>
+                <PrivateRoute path='/boxpass' component={BoxPass}/>
+                <PrivateRoute path='/boxperson' component={BoxPerson}/>
+                <PrivateRoute path='/profile' component={Profile}/>
+                <PrivateRoute path='/boxcreate' component={BoxCreate}/>
+                <PrivateRoute path='/myboxes' component={MyBoxes}/>
+                <PrivateRoute path='/favourite' component={Favourite}/>
+                <PrivateRoute path='/rules' component={Rules}/>
+                <PrivateRoute path='/logout' component={Logout}/>
+                <Menu/>
             </Switch>
         </Router>
     </Provider>,

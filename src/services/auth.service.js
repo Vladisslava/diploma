@@ -11,6 +11,8 @@ export default new class Authorization {
             data: `username=${username}&password=${password}`
         })();
 
+        console.log(res);
+        
         return {data: res.data, status: res.status};
     }
 

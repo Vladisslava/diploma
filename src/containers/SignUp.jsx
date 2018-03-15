@@ -21,8 +21,8 @@ class SignUp extends React.Component{
         
         console.log(await this.props.userSignup({
             username: event.target.inputLogin.value,
-            password: event.target.inputPassword,
-            email: event.target.inputEmail,
+            password: event.target.inputPassword.value,
+            email: event.target.inputEmail.value,
         }))
         //this.props.history.push('/home');
     };

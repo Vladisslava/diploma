@@ -3,6 +3,7 @@ import * as userActions from '../../constants/actions/user-actions.constants';
 const defaultState = {
     username: undefined,
     email: undefined,
+    id: undefined,
     token: undefined,
     isAuth: false,
     isAuthFail: false
@@ -23,13 +24,17 @@ export default function (state = initialState, {type, payload}) {
                 ...state,
                 isAuth: false,
                 isAuthFail: false,
-                username: payload.username,
+                username: payload.user.username,
+                id: payload.user.id,
                 token: payload.token,
-                email: payload.email
+                email: payload.user.email
             };
             break;
         case userActions.LOGIN_USER_FAIL:
             newState = {...state, isAuth: false, isAuthFail: true};
+            break;
+        case userActions.LOGOUT:
+            newState = {...defaultState};
             break;
         default:
             newState = state;

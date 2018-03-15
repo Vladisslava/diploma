@@ -9,7 +9,6 @@ class Rules extends React.Component {
     render() {
       return (
         <div>
-            <Menu/>
             <div className="wr-header_profile">
                     <div className="header_profile">
 

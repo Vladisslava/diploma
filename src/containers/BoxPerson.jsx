@@ -10,7 +10,6 @@ class BoxPerson extends React.Component {
     render() {
       return (
            <div>
-                <Menu/>
                 <HeaderBox/>
 
                 <div className="container">

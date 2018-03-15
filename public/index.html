@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
@@ -10,8 +10,8 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-     <meta name="mobile-web-app-capable" content="yes">
-     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -21,24 +21,28 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    
-    
+
+
     <title>React App</title>
-     <style>
+    <style>
         @font-face {
             font-family: MyriadPro; /* Имя шрифта */
             src: url(./fonts/MyriadPro.ttf); /* Путь к файлу со шрифтом */
-            }
-      </style>
-      <style type="text/css">
-      .load {
-           height: 100vh;
+        }
+    </style>
+    <style type="text/css">
+        .load {
+            height: 100vh;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -48,127 +52,108 @@
             -webkit-box-pack: center;
             -ms-flex-pack: center;
             justify-content: center;
-          flex-wrap: wrap;
+            flex-wrap: wrap;
             background: url(/static/media/1.d87e1daa.jpg) no-repeat;
             /*background: url(../src/img/1.jpg) no-repeat;*/
-         
+
         }
-          .load-img {
-              max-width: 100px;
-              flex-basis: 100%;
-              margin-bottom: 0;
-              margin-bottom: 50px;
-              text-align: center;
-          }
-          .load-text {
-              color: #fff;
-              font-weight: normal;
-              font-size: 22px;
-              flex-basis: 100%;
-             text-align: center;
-          }
-          
-      </style>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-      <div id="root">
-       <div class="load">
-           <!--<img class="load-img" src="../src/img/surprise.png" alt="">-->
-           <img class="load-img" src="/static/media/surprise.12b89691.png" alt="">
-             
-       </div>
-        
+
+        .load-img {
+            max-width: 100px;
+            flex-basis: 100%;
+            margin-bottom: 0;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .load-text {
+            color: #fff;
+            font-weight: normal;
+            font-size: 22px;
+            flex-basis: 100%;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<noscript>
+    You need to enable JavaScript to run this app.
+</noscript>
+<div id="root">
+    <div class="load">
+        <!--<img class="load-img" src="../src/img/surprise.png" alt="">-->
+        <img class="load-img" src="/static/media/surprise.12b89691.png" alt="">
+
     </div>
-    
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+</div>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('service-worker.js').then(function(registration) {
-            // Registration was successful
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-          }, function(err) {
-            // registration failed :(
-            console.log('ServiceWorker registration failed: ', err);
-          }).catch(function(err) {
-            console.log(err)
-          });
-        });
-      } else {
-        console.log('service worker is not supported');
-      }
-    </script>
-    <script>
-       
-  $(function () {
-              $(".menu-active").click(function() {
-                  $(".wr-menu").toggleClass("active");
-                    $(".wr-notmenu").toggleClass("active");
-                })
-            });
+<!--
+  This HTML file is a template.
+  If you open it directly in the browser, you will see an empty page.
 
-   </script>
-       <script>
-        $(document).mouseup(function(e) {
-          var $target = $(e.target);
-          if ($target.closest(".wr-menu").length == 0 && $target.closest(".menu-active").length == 0) {
+  You can add webfonts, meta tags, or analytics to this file.
+  The build step will place the bundled scripts into the <body> tag.
+
+  To begin the development, run `npm start` or `yarn start`.
+  To create a production bundle, use `npm run build` or `yarn build`.
+-->
+
+<script>
+
+    $(function () {
+        $(".menu-active").click(function () {
+            $(".wr-menu").toggleClass("active");
+            $(".wr-notmenu").toggleClass("active");
+        })
+    });
+
+</script>
+<script>
+    $(document).mouseup(function (e) {
+        var $target = $(e.target);
+        if ($target.closest(".wr-menu").length == 0 && $target.closest(".menu-active").length == 0) {
             $(".wr-menu").removeClass("active");
             $(".wr-notmenu").removeClass("active");
-          }
-        });
-      </script>
-          <script>
-       
-  $(function () {
-              $(".boxes-item__img img").click(function() {
-                  $(this).toggleClass("active");
-                    $(this).siblings().toggleClass("active");
-                })
-            });
-
-   </script>
-      <script>
-          
-         /* var checkbox = document.getElementById('check');
-
-            if (checkbox.checked) {
-              document.getElementsByClassName('profile_closebox').addClass('active');
-            }*/
-         $(function() {
-            $( "#check" ).click(function() {
-                        if($(this).is(":checked")) 
-                            {
-                                
-                               $('.profile_closebox').addClass('active');
-                            }
-                        else 
-                        {
-                           $('.profile_closebox').removeClass('active');
-                        }
-            })
-        });
-          
-          
-      
-	
-          
-     /*$('.mob-menu_item-submenu .mob-menu_link').click(function(){	//при клике на пункт меню:
-    $(this).next('.mob-menu_submenu').slideToggle(300);
-                $(this).parent().toggleClass('active');
-					//раскрываем/скрываем следующий за "кликнутым" p блок div с эффектом slide
-			});*/
+        }
+    });
 </script>
-  </body>
+<script>
+
+    $(function () {
+        $(".boxes-item__img img").click(function () {
+            $(this).toggleClass("active");
+            $(this).siblings().toggleClass("active");
+        })
+    });
+
+</script>
+<script>
+
+    /* var checkbox = document.getElementById('check');
+
+    if (checkbox.checked) {
+        document.getElementsByClassName('profile_closebox').addClass('active');
+    }*/
+    $(function () {
+        $("#check").click(function () {
+            if ($(this).is(":checked")) {
+
+                $('.profile_closebox').addClass('active');
+            }
+            else {
+                $('.profile_closebox').removeClass('active');
+            }
+        })
+    });
+
+
+    /*$('.mob-menu_item-submenu .mob-menu_link').click(function(){	//при клике на пункт меню:
+   $(this).next('.mob-menu_submenu').slideToggle(300);
+               $(this).parent().toggleClass('active');
+                   //раскрываем/скрываем следующий за "кликнутым" p блок div с эффектом slide
+           });*/
+</script>
+</body>
 </html>

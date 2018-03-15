@@ -12,61 +12,61 @@ import {NotificationManager} from 'react-notifications';
 
 
 class Signin extends Component {
-    login = async (login, password) => {
-        const isLogin = await this.props.userSignin({username: login, password});
+    signin = async (event) => {
+        event.preventDefault();
 
+        const isLogin = await this.props.userSignin({
+            username: event.target.inputEmail.value,
+            password: event.target.inputPassword.value
+        });
+        
         if (isLogin) {
             this.props.history.push('/home');
         } else {
             NotificationManager.error('Не верный логин или пароль');
         }
     };
-    
-render() {
-      return (
-        <div className="background">
-            <div className="registration background-mask">
-              <div className="container">
-                  <img src={surprise} alt=""/>
-                  
-                <form className="registration_form" onSubmit={this.login}>
-                    <h2 className="title">Авторизация</h2>
-                    
-                    <div className="registration_input">
-                       <img src={mail} alt=""/>
-                        <input type="text" onChange={this.handleEmailChange} id="inputEmail" placeholder="Логин" required />
+
+    render() {
+        return (
+            <div className="background">
+                <div className="registration background-mask">
+                    <div className="container">
+                        <img src={surprise} alt=""/>
+
+                        <form className="registration_form" onSubmit={this.signin}>
+                            <h2 className="title">Авторизация</h2>
+
+                            <div className="registration_input">
+                                <img src={mail} alt=""/>
+                                <input type="text" onChange={this.handleEmailChange} id="inputEmail" placeholder="Логин"
+                                       required/>
+                            </div>
+                            <div className="registration_input">
+                                <img src={key} alt=""/>
+                                <input type="password" placeholder="Пароль" onChange={this.handlePasswordChange}
+                                       id="inputPassword" required/>
+                            </div>
+                            <div className="registration_input registration_pass">
+                                <a href="">Забыли пароль?</a>
+                            </div>
+
+                            <div className="registration_input wr-button wr-button__white">
+                                <button className="button" type="submit">Войти</button>
+                            </div>
+
+                            <div className="registration_login">
+                                Ещё не зарегистрированы?
+                                <Link to="/signup"> Cоздать аккаунт</Link>
+                            </div>
+                        </form>
                     </div>
-                   <div className="registration_input">
-                       <img src={key} alt=""/>
-                        <input type="password" placeholder="Пароль" onChange={this.handlePasswordChange} id="inputPassword" required/>
-                    </div>
-                    <div className="registration_input registration_pass">
-                       <a href="">Забыли пароль?</a>
-                    </div>
-                
-                    <div className="registration_input wr-button wr-button__white">
-                          <Link to="/home"> 
-                             <button className="button" onClick={this.signIn} type="button">Войти</button>
-                        </Link>
-                        
-                        <button className="button" onClick={this.signIn} type="button">Войти</button>
-                    </div> 
-                    <input type="submit" name="submit" value="Войти"/>
-                    
-                    <div className="registration_login">
-                        Ещё не зарегистрированы? 
-                         <Link to="/signup"> Cоздать аккаунт</Link>
-                    </div>
-                  </form>
                 </div>
             </div>
-         </div>
 
-      )
+        )
     }
 }
-
-
 
 
 function mapDispatchToProps(dispatch) {

@@ -51,7 +51,7 @@ class Menu extends React.Component{
                          </li>
                          <li className="mob-menu__item">
                               
-                             <Link to="/signin">
+                             <Link to="/logout">
                              <img src={logout} alt=""/>Выйти</Link>
                          </li>
                     </ul>  
