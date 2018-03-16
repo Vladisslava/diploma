@@ -26,7 +26,7 @@ class BoxPass extends React.Component {
                             <input type="password" placeholder="Пароль" name="password"/>
                         </div>
                         <div className="registration_input wr-button">
-                            <Link to="/box">
+                            <Link to="/home/box">
                                 <input type="submit" name="submit" value="Вступить" className="button"/>
                             </Link>
                         </div>

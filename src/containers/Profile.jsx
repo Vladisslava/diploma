@@ -1,11 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../index.css';
-import Menu from "./../components/Menu.jsx";
 import img from '../img/img.png';
-import menu from '../img/menu.png';
 import upload from '../img/upload.png';
-import surprise from '../img/surprise.png';
 import Header from "./../components/Header.jsx";
 
 
@@ -19,9 +15,9 @@ class Profile extends React.Component {
                     <Header title="Profile"/>
                     
                     <div className="profile__photo">
-                       <div class="profile__img">
+                       <div className="profile__img">
                            <img src={img} alt=""/>
-                           <div class="profile__img-mask">
+                           <div className="profile__img-mask">
                                 <img src={upload} alt=""/>
                            </div>
                            

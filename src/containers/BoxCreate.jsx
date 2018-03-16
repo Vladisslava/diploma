@@ -8,27 +8,40 @@ import Header from "./../components/Header.jsx";
 import {connect} from "react-redux";
 import {createBox} from '../store/actions/box.actions';
 import {bindActionCreators} from 'redux';
+import {Button, FormControl, } from 'react-bootstrap';
 
 
 class BoxCreate extends React.Component {
+    state = {
+        isPrivate: false
+    };
+
     onCreateBox = async (event) => {
         event.preventDefault();
+        //TODO Добавить проверку пароля
+
         const data = {
             name: event.target.name.value,
             dateEnd: Date.parse(event.target.date.value),
             isPrivate: false,
-            password: null,
+            password: event.target.password.value,
             users: [],
             description: '',
             authorId: this.props.userId
         };
 
-        console.log(data);
+        console.log(this.data);
         
-        this.props.createBox(data);
+        // this.props.createBox(data);
+    };
+
+    onChangeIsPrivate = () => {
+        this.setState({isPrivate: !this.state.isPrivate});
     };
 
     render() {
+        console.log(this.state.isPrivate);
+
         return (
             <div>
                 <div className="wr-header_profile">
@@ -55,22 +68,24 @@ class BoxCreate extends React.Component {
                                     <input type="date" name="date" placeholder="date"/>
                                 </label>
                                 <label className="checkbox profile_input">
-                                    <input type="checkbox" name="check"/>
+                                    <FormControl value={this.state.isPrivate} onChange={this.onChangeIsPrivate} type='checkbox'/>
                                     <div className="checkbox__text">Закрытая коробка</div>
                                 </label>
-                                <div className="profile_closebox">
-                                    <label className="profile_input">
-                                        <span>Пароль</span>
-                                        <input type="password" name="password" placeholder="password"/>
-                                    </label>
-                                    <label className="profile_input">
-                                        <span>Повторите пароль</span>
-                                        <input type="password" name="password" placeholder="repeat password"/>
-                                    </label>
-                                </div>
-                                <div className="profile_input wr-button">
-                                    <input type="submit" name="submit" value="Сохранить" className="button"/>
-                                </div>
+                                {
+                                    this.state.isPrivate && (
+                                        <div>
+                                            <label className="profile_input">
+                                                <span>Пароль</span>
+                                                <input type="password" name="password" placeholder="password"/>
+                                            </label>
+                                            <label className="profile_input">
+                                                <span>Повторите пароль</span>
+                                                <input type="password" name="password" placeholder="repeat password"/>
+                                            </label>
+                                        </div>
+                                    )
+                                }
+                                <Button className='profile_input wr-button' type='submit'>Сохранить</Button>
                             </form>
                         </div>
                     </div>

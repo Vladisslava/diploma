@@ -19,7 +19,7 @@ class Signin extends Component {
             username: event.target.inputEmail.value,
             password: event.target.inputPassword.value
         });
-        
+
         if (isLogin) {
             this.props.history.push('/home');
         } else {

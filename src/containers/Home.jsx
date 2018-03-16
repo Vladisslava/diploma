@@ -1,9 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import '../index.css';
-import Menu from "./../components/Menu.jsx";
-import menu from '../img/menu.png';
-import surprise from '../img/surprise.png';
 import search from '../img/search.png';
 import like from '../img/like.png';
 import likee from '../img/likee.png';
@@ -24,11 +21,11 @@ class Home extends React.Component {
                         </form>
                         <div className="container">
                             <div className="wr-boxes">
-                                <Link className="boxes-item__plus" to="/boxcreate">
+                                <Link className="boxes-item__plus" to="/home/boxcreate">
                                     +
                                 </Link>
                                 <div className="boxes-item">
-                                    <Link to="/boxpass">
+                                    <Link to="/home/boxpass">
                                         <h3 className="boxes-item__name">Весь мир</h3>
                                     </Link>
                                     <p className="boxes-item__col">30 участников</p>
@@ -40,7 +37,7 @@ class Home extends React.Component {
                                     <p className="boxes-item__date">до 20.12.18</p>
                                 </div>
                                 <div className="boxes-item">
-                                    <Link to="/boxpass">
+                                    <Link to="/home/boxpass">
                                         <h3 className="boxes-item__name">Коробка</h3>
                                     </Link>
                                     <p className="boxes-item__col">30 участников</p>
@@ -51,7 +48,7 @@ class Home extends React.Component {
                                     <p className="boxes-item__date">до 20.12.18</p>
                                 </div>
                                 <div className="boxes-item">
-                                    <Link to="/boxpass">
+                                    <Link to="/home/boxpass">
                                         <h3 className="boxes-item__name">Коробка</h3>
                                     </Link>
                                     <p className="boxes-item__col">30 участников</p>
@@ -62,7 +59,7 @@ class Home extends React.Component {
                                     <p className="boxes-item__date">до 20.12.18</p>
                                 </div>
                                 <div className="boxes-item">
-                                    <Link to="/boxpass">
+                                    <Link to="/home/boxpass">
                                         <h3 className="boxes-item__name">Коробка</h3>
                                     </Link>
                                     <p className="boxes-item__col">30 участников</p>
@@ -73,7 +70,7 @@ class Home extends React.Component {
                                     <p className="boxes-item__date">до 20.12.18</p>
                                 </div>
                                 <div className="boxes-item">
-                                    <Link to="/boxpass">
+                                    <Link to="/home/boxpass">
                                         <h3 className="boxes-item__name">Коробка</h3>
                                     </Link>
                                     <p className="boxes-item__col">30 участников</p>
@@ -84,7 +81,7 @@ class Home extends React.Component {
                                     <p className="boxes-item__date">до 20.12.18</p>
                                 </div>
                                 <div className="boxes-item">
-                                    <Link to="/boxpass">
+                                    <Link to="/home/boxpass">
                                         <h3 className="boxes-item__name">Коробка</h3>
                                     </Link>
                                     <p className="boxes-item__col">30 участников</p>

@@ -1,22 +1,35 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Switch, Router} from 'react-router';
+import PrivateRoute from '../components/private-route';
+import BoxCreate from "../containers/BoxCreate.jsx";
+import Rules from "./Rules";
+import Profile from "./Profile";
+import BoxPerson from "./BoxPerson";
+import MyBoxes from "./MyBoxes";
+import BoxPass from "./BoxPass";
+import Favourite from "./Favourite";
+import Box from "./Box";
+import Menu from "../components/Menu";
+import Home from "../containers/Home.jsx";
 
 class App extends Component {
-
-    submitData = event => {
-        event.preventDefault();
-        this.props.history.push('/home');
-    };
-
     render() {
         return (
             <div className="App">
-                <Link to="/signin">
-                    Войти
-                </Link>
-                <Link to="/signup">
-                    Нету аккаунта? Зарегистрироваться
-                </Link>
+                <Router history={this.props.history}>
+                    <Switch>
+                        <PrivateRoute path='/home/boxcreate' component={BoxCreate}/>
+                        <PrivateRoute path='/home/boxpass' component={BoxPass}/>
+                        <PrivateRoute path='/home/boxperson' component={BoxPerson}/>
+                        <PrivateRoute path='/home/profile' component={Profile}/>
+                        <PrivateRoute path='/home/myboxes' component={MyBoxes}/>
+                        <PrivateRoute path='/home/favourite' component={Favourite}/>
+                        <PrivateRoute path='/home/box' component={Box}/>
+                        <PrivateRoute path='/home/rules' component={Rules}/>
+                        <PrivateRoute path='/home' component={Home}/>
+                    </Switch>
+                </Router>
+                <Menu/>
             </div>
         );
     }
