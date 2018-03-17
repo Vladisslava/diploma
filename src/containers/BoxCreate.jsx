@@ -1,9 +1,4 @@
 import React from 'react';
-/*import {Link} from 'react-router-dom';
-import Menu from "./../components/Menu.jsx";
-import img from '../img/img.png';
-import menu from '../img/menu.png';
-import surprise from '../img/surprise.png';*/
 import Header from "./../components/Header.jsx";
 import {connect} from "react-redux";
 import {createBox} from '../store/actions/box.actions';
@@ -30,8 +25,8 @@ class BoxCreate extends React.Component {
             authorId: this.props.userId
         };
 
-        console.log(this.data);
-        
+        console.log(data);
+
         // this.props.createBox(data);
     };
 
@@ -97,7 +92,7 @@ class BoxCreate extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        userId: state.user.id
+        userId: state.auth.id
     }
 }
 

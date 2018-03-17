@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../index.css';
-import Menu from "./../components/Menu.jsx";
 import HeaderBox from "./../components/HeaderBox.jsx";
 import img from '../img/img.png';
 

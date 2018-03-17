@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {withRouter, Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {userSignin, userSignup} from '../store/actions/user.actions';
+import {userSignup} from '../store/actions/auth.actions';
 import '../index.css';
 import surprise from '../img/surprise.png';
 import user from '../img/user.png';
@@ -15,11 +15,12 @@ class SignUp extends Component {
         event.preventDefault();
 
 
-        console.log(await this.props.userSignup({
+        await this.props.userSignup({
             username: event.target.inputLogin.value,
             password: event.target.inputPassword.value,
             email: event.target.inputEmail.value,
-        }))
+        })
+
         //this.props.history.push('/home');
     };
 
@@ -76,7 +77,6 @@ class SignUp extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         userSignup: bindActionCreators(userSignup, dispatch),
-        userSignin: bindActionCreators(userSignin, dispatch),
     }
 }
 

@@ -10,8 +10,6 @@ export default new class Authorization {
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             data: `username=${username}&password=${password}`
         })();
-
-        console.log(res);
         
         return {data: res.data, status: res.status};
     }
@@ -28,4 +26,4 @@ export default new class Authorization {
         return {data: res.data, status: res.status};
     }
 
-}
+}();

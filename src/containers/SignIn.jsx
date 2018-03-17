@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {userSignin} from '../store/actions/user.actions';
+import {userSignin} from '../store/actions/auth.actions';
+import {getUserInfo} from '../store/actions/user.actions';
 
 import '../index.css';
 import surprise from '../img/surprise.png';
@@ -10,9 +11,8 @@ import mail from '../img/mail.png';
 import key from '../img/key.png';
 import {NotificationManager} from 'react-notifications';
 
-
 class Signin extends Component {
-    signin = async (event) => {
+    signIn = async (event) => {
         event.preventDefault();
 
         const isLogin = await this.props.userSignin({
@@ -21,6 +21,7 @@ class Signin extends Component {
         });
 
         if (isLogin) {
+            await this.props.getUserInfo(this.props.userId);
             this.props.history.push('/home');
         } else {
             NotificationManager.error('Не верный логин или пароль');
@@ -34,7 +35,7 @@ class Signin extends Component {
                     <div className="container">
                         <img src={surprise} alt=""/>
 
-                        <form className="registration_form" onSubmit={this.signin}>
+                        <form className="registration_form" onSubmit={this.signIn}>
                             <h2 className="title">Авторизация</h2>
 
                             <div className="registration_input">
@@ -68,11 +69,17 @@ class Signin extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        userId: state.auth.id,
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     return {
         userSignin: bindActionCreators(userSignin, dispatch),
+        getUserInfo: bindActionCreators(getUserInfo, dispatch),
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(Signin));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Signin));

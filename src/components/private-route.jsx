@@ -24,7 +24,7 @@ class PrivateRoute extends Component
 
 function mapStateToProps(state) {
     return {
-        isUserAuth: state.user.token !== undefined
+        isUserAuth: state.auth.token !== undefined
     }
 }
 

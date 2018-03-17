@@ -1,76 +1,40 @@
+import axios from 'axios';
+import {apiConstants} from "../../constants/api.constants";
 import * as userActions from '../../constants/actions/user-actions.constants';
-import authorization from '../../services/auth.service';
 
-export function authStart() {
-    return {type: userActions.AUTH_USER_START}
+function updateUserInfo(data) {
+    return {type: userActions.UPDATE_USER_INFO, payload: data}
 }
 
-export function loginSuccess(user) {
-    return {type: userActions.LOGIN_USER_SUCCESS, payload: user}
-}
-
-export function loginFail() {
-    return {type: userActions.LOGIN_USER_FAIL}
-}
-
-export function registrationSuccess() {
-    return {type: userActions.REGISTRATION_SUCCESS}
-}
-
-export function registrationFail() {
-    return {type: userActions.REGISTRATION_FAIL}
-}
-
-export function userSignin({username, password}) {
+export function updateUser(id, data) {
     return async (dispatch) => {
-        try {
-            dispatch(authStart());
+        let dataString = '';
+        const keys = Object.keys(data);
+        const keysCount = keys.length;
 
-            const res = await authorization.login(username, password);
+        keys.forEach((key, index) => {
+            dataString += key + '=' + data[key];
+            (index !== keysCount - 1) && (dataString += '&')
+        });
 
-            if (res.status === 200) {
-                dispatch(loginSuccess(res.data));
-
-                return true;
-            } else {
-                dispatch(loginFail());
-
-                return false;
-            }
-        } catch (e) {
-            dispatch(loginFail());
-
-            return false;
+        const res = await axios.create({
+            url: apiConstants.user + '/' + id,
+            method: 'put',
+            baseURL: apiConstants.baseUrl,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            data: dataString
+        })();
+        
+        if (res.statusText === 'OK') {
+            dispatch(updateUserInfo(data))
         }
     }
 }
 
-export function userSignup(userData) {
+export function getUserInfo(id) {
     return async (dispatch) => {
-        try {
-            dispatch(authStart());
+        const res = await axios.get(apiConstants.baseUrl + apiConstants.user + '/' + id);
 
-            const data = await authorization.registration(userData.username, userData.email, userData.password);
-
-            console.log(data);
-            
-            if (data.status === 201) {
-                dispatch(registrationSuccess());
-
-                return true;
-            } else {
-                dispatch(registrationFail());
-
-                return false;
-            }
-        } catch (e) {
-            dispatch(registrationFail());
-
-            return false;
-        }
+        dispatch(updateUserInfo(res.data));
     }
-}
-
-export function userLogout() {
-    return {type: userActions.LOGOUT}
 }

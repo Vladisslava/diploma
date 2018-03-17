@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {userLogout} from '../store/actions/user.actions';
+import {userLogout} from '../store/actions/auth.actions';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";

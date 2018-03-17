@@ -1,8 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import '../index.css';
-import menu from '../img/menu.png';
-import surprise from '../img/surprise.png';
 import Header from "./Header.jsx";
 
 class HeaderBox extends React.Component {

@@ -8,7 +8,8 @@ const apiConstants = {
     baseUrl: devBaseUrl,
     signinUrl: '/signin',
     signupUrl: '/signup',
-    box: '/box'
+    box: '/box',
+    user: '/user'
 };
 
 export {apiConstants};

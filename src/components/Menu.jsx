@@ -60,7 +60,7 @@ class Menu extends React.Component {
                         </li>
                         <li className="mob-menu__item">
 
-                            <Link onClick={this.onClick} to="/home/logout">
+                            <Link onClick={this.onClick} to="/logout">
                                 <img src={logout} alt=""/>Выйти</Link>
                         </li>
                     </ul>
