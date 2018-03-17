@@ -17,17 +17,15 @@ export function updateUser(id, data) {
             (index !== keysCount - 1) && (dataString += '&')
         });
 
-        const res = await axios.create({
+        await axios.create({
             url: apiConstants.user + '/' + id,
             method: 'put',
             baseURL: apiConstants.baseUrl,
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             data: dataString
         })();
-        
-        if (res.statusText === 'OK') {
-            dispatch(updateUserInfo(data))
-        }
+
+        dispatch(updateUserInfo({user: data}));
     }
 }
 

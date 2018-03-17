@@ -14,20 +14,29 @@ import {connect} from "react-redux";
 
 class Menu extends React.Component {
     onClick = () => {
-        console.log('dasd');
-
         this.props.menuClose();
     };
 
     render() {
+        const {
+            username,
+            firstName,
+            lastName,
+            address
+        } = this.props.user;
+
         return (
             <div>
                 <div className={"wr-menu" + (this.props.isOpen ? ' active' : '')}>
                     <div className="wr-menu__header">
                         <div className="wr-menu__header-mask">
                             <img src={img} alt=""/>
-                            <p className="wr-menu__name">Vladislava Minenko</p>
-                            <p className="wr-menu__adress">Kanatnaya, 100/3, ap.30</p>
+                            <p className="wr-menu__name">{
+                                firstName === '' || lastName  === '' ? username : firstName + ' ' + lastName
+                            }</p>
+                            <p className="wr-menu__adress">{
+                                address === '' ? 'Добавить свой адрес в профиле' : address
+                            }</p>
                         </div>
                     </div>
                     <ul className="mob-menu">
@@ -73,6 +82,12 @@ class Menu extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        user: {
+            username: state.user.username,
+            firstName: state.user.firstName,
+            lastName: state.user.lastName,
+            address: state.user.address
+        },
         isOpen: state.menu.isOpen
     }
 }
