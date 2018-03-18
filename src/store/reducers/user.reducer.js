@@ -12,6 +12,7 @@ const defaultState = {
     city: undefined,
     address: undefined,
     postcode: undefined,
+    favoritesBox: undefined
 };
 
 const initialState = localStorage.getItem('user-state') === null ?
@@ -21,6 +22,9 @@ export default function (state = initialState, {type, payload}) {
     let newState;
 
     switch (type) {
+        case userActions.UPDATE_FAVORITE_BOX:
+            newState = {...state, favoritesBox: payload};
+            break;
         case userActions.UPDATE_USER_INFO:
             newState = {...state, ...payload.user};
             break;

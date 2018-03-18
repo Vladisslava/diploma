@@ -10,7 +10,7 @@ import BoxPass from "./BoxPass";
 import Favourite from "./Favourite";
 import Box from "./Box";
 import Menu from "../components/Menu";
-import Home from "../containers/Home.jsx";
+import Home from "./Home/Home.jsx";
 
 class App extends Component {
     render() {
@@ -19,7 +19,7 @@ class App extends Component {
                 <Router history={this.props.history}>
                     <Switch>
                         <PrivateRoute path='/home/boxcreate' component={BoxCreate}/>
-                        <PrivateRoute path='/home/boxpass' component={BoxPass}/>
+                        <PrivateRoute path='/home/box/:id' component={BoxPass}/>
                         <PrivateRoute path='/home/boxperson' component={BoxPerson}/>
                         <PrivateRoute path='/home/profile' component={Profile}/>
                         <PrivateRoute path='/home/myboxes' component={MyBoxes}/>

@@ -4,8 +4,38 @@ import '../index.css';
 import search from '../img/search.png';
 import like from '../img/like.png';
 import Header from "./../components/Header.jsx";
+import {favoriteBox} from "../store/actions/user.actions";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import axios from 'axios';
+import {apiConstants} from '../constants/api.constants';
+import BoxItem from "./Home/BoxItem";
 
 class Favourite extends React.Component {
+    state = {
+        boxes: []
+    };
+
+    async componentDidMount() {
+        if (!this.props.favoriteBoxes) {
+            return;
+        }
+
+        const requests = this.props.favoriteBoxes.map(item => {
+            return axios.get(apiConstants.baseUrl + apiConstants.box + '/' + item)
+        });
+
+        const res = await axios.all(requests);
+        this.setState({boxes: res.map(item => item.data.box)})
+    }
+
+    onFavorite = (event) => {
+        this.props.favoriteBox({
+            userId: this.props.userId,
+            boxId: event.target.dataset.id
+        });
+    };
+
     render() {
         return (
             <div>
@@ -20,30 +50,14 @@ class Favourite extends React.Component {
                         </form>
                         <div className="container">
                             <div className="wr-boxes">
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={like} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={like} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={like} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={like} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
+                                {this.state.boxes.map(item => {
+                                    return <BoxItem
+                                        isFavorite={this.props.favoriteBoxes.includes(item._id)}
+                                        onFavorite={this.onFavorite}
+                                        key={item._id}
+                                        box={item}
+                                    />
+                                })}
                             </div>
                         </div>
                     </div>
@@ -53,5 +67,17 @@ class Favourite extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        userId: state.auth.id,
+        favoriteBoxes: state.user.favoritesBox
+    }
+}
 
-export default Favourite;
+function mapDispatchToProps(dispatch) {
+    return {
+        favoriteBox: bindActionCreators(favoriteBox, dispatch),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favourite);

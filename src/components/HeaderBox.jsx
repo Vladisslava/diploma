@@ -1,6 +1,7 @@
 import React from 'react';
 import '../index.css';
 import Header from "./Header.jsx";
+import {formatDate} from '../libs/helpers';
 
 class HeaderBox extends React.Component {
     render() {
@@ -10,15 +11,15 @@ class HeaderBox extends React.Component {
                     <Header title=""/>
                     <div className="box-desc">
                         <div className="box-desc__name">
-                            <h3>New Year</h3>
+                            <h3>{this.props.title}</h3>
                         </div>
                         <div className="box-desc__item">
                             <span>Количество участников:</span>
-                            <span className="box-desc__num">30</span>
+                            <span className="box-desc__num">{this.props.count}</span>
                         </div>
                         <div className="box-desc__item">
                             <span>Дата распределения:</span>
-                            <span className="box-desc__num">15.12.2018</span>
+                            <span className="box-desc__num">{formatDate(this.props.time)}</span>
                         </div>
                     </div>
                 </div>

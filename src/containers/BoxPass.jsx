@@ -3,22 +3,30 @@ import {Link} from 'react-router-dom';
 import '../index.css';
 import HeaderBox from "./../components/HeaderBox.jsx";
 import key from '../img/key.png';
+import {downloadBox} from "../store/actions/box.actions";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
 
 class BoxPass extends React.Component {
+    componentDidMount() {
+        this.props.downloadBox(this.props.match.params.id);
+    }
+
     render() {
+        if (this.props.box === undefined) {
+            return (
+                <div>Загрузка</div>
+            )
+        }
+
         return (
             <div>
-                <HeaderBox/>
+                <HeaderBox time={this.props.box.dateEnd} count={this.props.box.users.length} title={this.props.box.name}/>
                 <div className="container">
                     <div className="wr-box">
                         <div className="wr-box__description">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error illum, voluptatibus,
-                                suscipit libero numquam neque aut dolorum debitis vero impedit voluptatum nihil,
-                                delectus sed ullam qui optio excepturi magni laboriosam, dignissimos facilis eaque est a
-                                unde!
-                            </p>
+                            <p>{this.props.box.description}</p>
                         </div>
                         <div className="wr-box__input registration_input">
                             <img src={key} alt=""/>
@@ -36,5 +44,16 @@ class BoxPass extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        box: state.box.box,
+    }
+}
 
-export default BoxPass;
+function mapDispatchToProps(dispatch) {
+    return {
+        downloadBox: bindActionCreators(downloadBox, dispatch),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoxPass);

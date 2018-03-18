@@ -1,6 +1,11 @@
 import * as boxesActionConstants from '../../constants/actions/box-actions.constants';
 import {apiConstants} from '../../constants/api.constants';
 import axios from 'axios';
+import {buildDataString} from '../../libs/helpers';
+
+export function setBox(boxes) {
+    return {type: boxesActionConstants.SET_BOX, payload: boxes}
+}
 
 export function setBoxes(boxes) {
     return {type: boxesActionConstants.SET_BOXES, payload: boxes}
@@ -14,18 +19,19 @@ export function boxesLoadFail() {
     return {type: boxesActionConstants.BOXES_LOADING_FAIL}
 }
 
-export function boxesLoadSuccess(boxes) {
-    return {type: boxesActionConstants.BOXES_LOADING_SUCCESS, payload: boxes}
+export function boxesLoadSuccess() {
+    return {type: boxesActionConstants.BOXES_LOADING_SUCCESS}
 }
 
-export function downloadBoxes() {
+export function downloadBoxesByPage(page) {
     return async (dispatch) => {
         dispatch(boxesLoadStart());
 
         try {
-            const boxes = await axios.get(apiConstants.baseUrl + apiConstants.box);
-
-            dispatch(boxesLoadSuccess(boxes));
+            const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/all/${page}`);
+            
+            dispatch(boxesLoadSuccess());
+            dispatch(setBoxes(boxes.data));
         } catch (e) {
             console.log(e);
 
@@ -34,7 +40,24 @@ export function downloadBoxes() {
     }
 }
 
-export function createBox({name, dateEnd, isPrivate, password, users, description, authorId}) {
+export function downloadBox(id) {
+    return async (dispatch) => {
+        dispatch(boxesLoadStart());
+
+        try {
+            const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/${id}`);
+
+            dispatch(boxesLoadSuccess());
+            dispatch(setBox(boxes.data));
+        } catch (e) {
+            console.log(e);
+
+            dispatch(boxesLoadFail());
+        }
+    }
+}
+
+export function createBox(data) {
     return async (dispatch) => {
         try {
             const res = await axios.create({
@@ -42,7 +65,7 @@ export function createBox({name, dateEnd, isPrivate, password, users, descriptio
                 method: 'post',
                 baseURL: apiConstants.baseUrl,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                data: `name=${name}&dateEnd=${dateEnd}&isPrivate=${isPrivate}&password=${password}&users=${users}&description=${description}&authorId=${authorId}`
+                data: buildDataString(data)
             })();
 
             console.log(res);

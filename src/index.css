@@ -1,3 +1,7 @@
+@font-face {
+    font-family: MyriadPro; /* Имя шрифта */
+    src: url(./fonts/MyriadPro.ttf); /* Путь к файлу со шрифтом */
+}
 
 .App {
     text-align: center;

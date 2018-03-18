@@ -22,10 +22,12 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -33,14 +35,7 @@
             crossorigin="anonymous"></script>
 
 
-
     <title>React App</title>
-    <style>
-        @font-face {
-            font-family: MyriadPro; /* Имя шрифта */
-            src: url(./fonts/MyriadPro.ttf); /* Путь к файлу со шрифтом */
-        }
-    </style>
     <style type="text/css">
         .load {
             height: 100vh;
@@ -89,72 +84,5 @@
     </div>
 
 </div>
-
-<!--
-  This HTML file is a template.
-  If you open it directly in the browser, you will see an empty page.
-
-  You can add webfonts, meta tags, or analytics to this file.
-  The build step will place the bundled scripts into the <body> tag.
-
-  To begin the development, run `npm start` or `yarn start`.
-  To create a production bundle, use `npm run build` or `yarn build`.
--->
-
-<script>
-
-    /*$(function () {
-        $(".menu-active").click(function () {
-            $(".wr-menu").toggleClass("active");
-            $(".wr-notmenu").toggleClass("active");
-        })
-    });*/
-
-</script>
-<script>
-    $(document).mouseup(function (e) {
-        var $target = $(e.target);
-        if ($target.closest(".wr-menu").length == 0 && $target.closest(".menu-active").length == 0) {
-            $(".wr-menu").removeClass("active");
-            $(".wr-notmenu").removeClass("active");
-        }
-    });
-</script>
-<script>
-
-    $(function () {
-        $(".boxes-item__img img").click(function () {
-            $(this).toggleClass("active");
-            $(this).siblings().toggleClass("active");
-        })
-    });
-
-</script>
-<script>
-
-    /* var checkbox = document.getElementById('check');
-
-    if (checkbox.checked) {
-        document.getElementsByClassName('profile_closebox').addClass('active');
-    }*/
-    $(function () {
-        $("#check").click(function () {
-            if ($(this).is(":checked")) {
-
-                $('.profile_closebox').addClass('active');
-            }
-            else {
-                $('.profile_closebox').removeClass('active');
-            }
-        })
-    });
-
-
-    /*$('.mob-menu_item-submenu .mob-menu_link').click(function(){	//при клике на пункт меню:
-   $(this).next('.mob-menu_submenu').slideToggle(300);
-               $(this).parent().toggleClass('active');
-                   //раскрываем/скрываем следующий за "кликнутым" p блок div с эффектом slide
-           });*/
-</script>
 </body>
 </html>

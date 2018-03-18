@@ -15,19 +15,19 @@ class BoxCreate extends React.Component {
         event.preventDefault();
         //TODO Добавить проверку пароля
 
+        const password = event.target.password !== undefined ? event.target.password.value : '';
+
         const data = {
             name: event.target.name.value,
             dateEnd: Date.parse(event.target.date.value),
             isPrivate: false,
-            password: event.target.password.value,
+            password: password,
             users: [],
             description: '',
             authorId: this.props.userId
         };
 
-        console.log(data);
-
-        // this.props.createBox(data);
+        this.props.createBox(data);
     };
 
     onChangeIsPrivate = () => {
