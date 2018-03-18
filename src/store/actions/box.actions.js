@@ -7,6 +7,10 @@ export function setBox(boxes) {
     return {type: boxesActionConstants.SET_BOX, payload: boxes}
 }
 
+export function setBoxPassword(payload) {
+    return {type: boxesActionConstants.SET_BOX_PASSWORD, payload}
+}
+
 export function setBoxes(boxes) {
     return {type: boxesActionConstants.SET_BOXES, payload: boxes}
 }
@@ -68,7 +72,41 @@ export function createBox(data) {
                 data: buildDataString(data)
             })();
 
-            console.log(res);
+            return res;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+export function joinTheBox(data) {
+    return async (dispatch) => {
+        try {
+            const res = await axios.create({
+                url: apiConstants.box + '/join',
+                method: 'post',
+                baseURL: apiConstants.baseUrl,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                data: buildDataString(data)
+            })();
+
+            return res;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+export function leaveBox(data) {
+    return async (dispatch) => {
+        try {
+            return await axios.create({
+                method: 'post',
+                url: apiConstants.box + '/leave',
+                baseURL: apiConstants.baseUrl,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                data: buildDataString(data)
+            })();
         } catch (e) {
             console.log(e);
         }

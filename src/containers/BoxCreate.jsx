@@ -14,13 +14,13 @@ class BoxCreate extends React.Component {
     onCreateBox = async (event) => {
         event.preventDefault();
         //TODO Добавить проверку пароля
-
+        
         const password = event.target.password !== undefined ? event.target.password.value : '';
 
         const data = {
             name: event.target.name.value,
             dateEnd: Date.parse(event.target.date.value),
-            isPrivate: false,
+            isPrivate: this.state.isPrivate,
             password: password,
             users: [],
             description: '',
@@ -35,8 +35,6 @@ class BoxCreate extends React.Component {
     };
 
     render() {
-        console.log(this.state.isPrivate);
-
         return (
             <div>
                 <div className="wr-header_profile">
@@ -75,7 +73,7 @@ class BoxCreate extends React.Component {
                                             </label>
                                             <label className="profile_input">
                                                 <span>Повторите пароль</span>
-                                                <input type="password" name="password" placeholder="repeat password"/>
+                                                <input type="password" name="repeat-password" placeholder="repeat password"/>
                                             </label>
                                         </div>
                                     )

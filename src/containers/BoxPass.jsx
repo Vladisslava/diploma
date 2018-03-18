@@ -1,17 +1,46 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import '../index.css';
 import HeaderBox from "./../components/HeaderBox.jsx";
 import key from '../img/key.png';
-import {downloadBox} from "../store/actions/box.actions";
+import {downloadBox, joinTheBox, setBoxPassword} from "../store/actions/box.actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {NotificationManager} from "react-notifications";
+import {withRouter} from "react-router-dom";
 
 
 class BoxPass extends React.Component {
     componentDidMount() {
         this.props.downloadBox(this.props.match.params.id);
     }
+
+    onJoin = async (event) => {
+        event.preventDefault();
+
+        let password = '';
+
+        if (this.props.box.isPrivate) {
+            password = event.target.password.value
+        }
+
+        const data = {
+            userId: this.props.userId,
+            boxId: this.props.box._id,
+            password
+        };
+
+        console.log(this.props);
+        console.log(data);
+        
+        const res = await this.props.joinTheBox(data);
+
+        if (res.data.isJoin) {
+            this.props.setBoxPassword(password);
+            this.props.history.push('/home/box');
+        } else {
+            NotificationManager.error(res.data.msg);
+        }
+    };
 
     render() {
         if (this.props.box === undefined) {
@@ -22,22 +51,25 @@ class BoxPass extends React.Component {
 
         return (
             <div>
-                <HeaderBox time={this.props.box.dateEnd} count={this.props.box.users.length} title={this.props.box.name}/>
+                <HeaderBox time={this.props.box.dateEnd}
+                           count={this.props.box.users.length}
+                           title={this.props.box.name}
+                />
                 <div className="container">
-                    <div className="wr-box">
+                    <form onSubmit={this.onJoin} className="wr-box">
                         <div className="wr-box__description">
                             <p>{this.props.box.description}</p>
                         </div>
-                        <div className="wr-box__input registration_input">
-                            <img src={key} alt=""/>
-                            <input type="password" placeholder="Пароль" name="password"/>
-                        </div>
+                        {this.props.box.isPrivate && (
+                            <div className="wr-box__input registration_input">
+                                <img src={key} alt=""/>
+                                <input type="password" placeholder="Пароль" name="password"/>
+                            </div>
+                        )}
                         <div className="registration_input wr-button">
-                            <Link to="/home/box">
-                                <input type="submit" name="submit" value="Вступить" className="button"/>
-                            </Link>
+                            <input type="submit" name="submit" value="Вступить" className="button"/>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         )
@@ -46,6 +78,7 @@ class BoxPass extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        userId: state.auth.id,
         box: state.box.box,
     }
 }
@@ -53,7 +86,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         downloadBox: bindActionCreators(downloadBox, dispatch),
+        joinTheBox: bindActionCreators(joinTheBox, dispatch),
+        setBoxPassword: bindActionCreators(setBoxPassword, dispatch),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoxPass);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BoxPass));

@@ -28,6 +28,9 @@ export default function (state = initialState, {type, payload}) {
                 total: payload.boxes.total
             };
             break;
+        case boxesActionConstants.SET_BOX_PASSWORD:
+            newState = {...state, box: {...state.box, password: payload}};
+            break;
         case boxesActionConstants.BOXES_LOADING:
             newState = {...state, boxesIsLoading: true};
             break;

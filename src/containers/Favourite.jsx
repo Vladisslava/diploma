@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import '../index.css';
 import search from '../img/search.png';
-import like from '../img/like.png';
 import Header from "./../components/Header.jsx";
 import {favoriteBox} from "../store/actions/user.actions";
 import {bindActionCreators} from "redux";
