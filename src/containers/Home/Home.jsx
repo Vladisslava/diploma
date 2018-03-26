@@ -48,7 +48,6 @@ class Home extends React.Component {
                                 {this.props.boxes.map(item => {
                                     return <BoxItem
                                         isFavorite={this.props.favoriteBoxes.includes(item._id)}
-                                        onFavorite={this.onFavorite}
                                         key={item._id}
                                         box={item}
                                     />

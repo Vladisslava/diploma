@@ -1,11 +1,38 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import '../index.css';
 import search from '../img/search.png';
-import likee from '../img/likee.png';
 import Header from "./../components/Header.jsx";
+import axios from 'axios';
+import {apiConstants} from '../constants/api.constants';
+import {connect} from "react-redux";
+import {Pagination} from "react-bootstrap";
+import BoxItem from "./Home/BoxItem";
 
 class MyBoxes extends React.Component {
+    state = {
+        page: 1,
+        pages: 1,
+        boxes: [],
+    };
+
+    async downloadFavoriteBoxes (data) {
+        const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/user/${this.props.userId}?page${[data]}`);
+        
+        const {docs, page, pages} = boxes.data.boxes;
+
+        this.setState({boxes: docs, page, pages});
+    }
+
+    async componentDidMount() {
+        await this.downloadFavoriteBoxes(1);
+    }
+
+    onPaginationClick = async (event) => {
+        event.preventDefault();
+
+        await this.downloadFavoriteBoxes(+event.target.getAttribute('href'));
+    };
+
     render() {
         return (
             <div>
@@ -20,31 +47,28 @@ class MyBoxes extends React.Component {
                         </form>
                         <div className="container">
                             <div className="wr-boxes">
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={likee} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={likee} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={likee} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
-                                <Link className="boxes-item" to="/home/boxpass">
-                                    <h3 className="boxes-item__name">Коробка</h3>
-                                    <p className="boxes-item__col">30 участников</p>
-                                    <img src={likee} alt=""/>
-                                    <p className="boxes-item__date">до 20.12.18</p>
-                                </Link>
+                                {this.state.boxes.map(item => {
+                                    return <BoxItem
+                                        isFavorite={this.props.favoriteBoxes.includes(item._id)}
+                                        key={item._id}
+                                        box={item}
+                                    />
+                                })}
                             </div>
+                            {this.props.total !== 0 && (
+                                <Pagination bsSize="large">
+                                    {[...Array(this.state.pages).keys()].map(item => {
+                                        return (
+                                            <Pagination.Item
+                                                key={item}
+                                                href={(item + 1) + ''}
+                                                active={this.state.page === item + 1}
+                                                onClick={this.onPaginationClick}
+                                            >{item + 1}</Pagination.Item>
+                                        )
+                                    })}
+                                </Pagination>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -53,5 +77,13 @@ class MyBoxes extends React.Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        userId: state.auth.id,
+        favoriteBoxes: state.user.favoritesBox
+    }
+}
 
-export default MyBoxes;
+
+
+export default connect(mapStateToProps)(MyBoxes);

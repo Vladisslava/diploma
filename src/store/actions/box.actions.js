@@ -97,6 +97,14 @@ export function joinTheBox(data) {
     }
 }
 
+export function isJoinedToBox(data) {
+    return async (dispatch) => {
+        const res = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/join?${buildDataString(data)}`);
+
+        return res.data.isJoined;
+    };
+}
+
 export function leaveBox(data) {
     return async (dispatch) => {
         try {

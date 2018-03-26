@@ -2,7 +2,7 @@ import React from 'react';
 import '../index.css';
 import HeaderBox from "./../components/HeaderBox.jsx";
 import key from '../img/key.png';
-import {downloadBox, joinTheBox, setBoxPassword} from "../store/actions/box.actions";
+import {downloadBox, joinTheBox, setBoxPassword, isJoinedToBox} from "../store/actions/box.actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {NotificationManager} from "react-notifications";
@@ -10,8 +10,16 @@ import {withRouter} from "react-router-dom";
 
 
 class BoxPass extends React.Component {
-    componentDidMount() {
-        this.props.downloadBox(this.props.match.params.id);
+    async componentDidMount() {
+        if (!this.props.box || this.props.box._id !== this.props.match.params.id) {
+            await this.props.downloadBox(this.props.match.params.id);
+        }
+
+        const isJoined = await this.props.isJoinedToBox({userId: this.props.userId, boxId: this.props.box._id});
+
+        if (isJoined) {
+            this.props.history.push('/home/box');
+        }
     }
 
     onJoin = async (event) => {
@@ -28,9 +36,6 @@ class BoxPass extends React.Component {
             boxId: this.props.box._id,
             password
         };
-
-        console.log(this.props);
-        console.log(data);
         
         const res = await this.props.joinTheBox(data);
 
@@ -85,6 +90,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        isJoinedToBox: bindActionCreators(isJoinedToBox, dispatch),
         downloadBox: bindActionCreators(downloadBox, dispatch),
         joinTheBox: bindActionCreators(joinTheBox, dispatch),
         setBoxPassword: bindActionCreators(setBoxPassword, dispatch),

@@ -19,12 +19,12 @@ class App extends Component {
                 <Router history={this.props.history}>
                     <Switch>
                         <PrivateRoute path='/home/boxcreate' component={BoxCreate}/>
-                        <PrivateRoute path='/home/box/:id' component={BoxPass}/>
+                        <PrivateRoute exact path='/home/box/:id' component={BoxPass}/>
                         <PrivateRoute path='/home/boxperson' component={BoxPerson}/>
                         <PrivateRoute path='/home/profile' component={Profile}/>
                         <PrivateRoute path='/home/myboxes' component={MyBoxes}/>
                         <PrivateRoute path='/home/favourite' component={Favourite}/>
-                        <PrivateRoute path='/home/box' component={Box}/>
+                        <PrivateRoute exact path='/home/box' component={Box}/>
                         <PrivateRoute path='/home/rules' component={Rules}/>
                         <PrivateRoute path='/home' component={Home}/>
                     </Switch>

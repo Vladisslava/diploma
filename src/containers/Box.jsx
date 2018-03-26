@@ -4,18 +4,23 @@ import '../index.css';
 import HeaderBox from "./../components/HeaderBox.jsx";
 import surprise from './../img/surprise.png';
 import {bindActionCreators} from "redux";
-import {downloadBox, leaveBox} from "../store/actions/box.actions";
+import {isJoinedToBox, leaveBox} from "../store/actions/box.actions";
 import {connect} from "react-redux";
 
 class Box extends React.Component {
-    componentDidMount() {
-        if (!this.props.box || (this.props.box.isPrivate && this.props.box.password === '')) {
+    async componentDidMount() {
+        if (this.props.box) {
+            const isJoined = await this.props.isJoinedToBox({userId: this.props.userId, boxId: this.props.box._id});
+
+            !isJoined && this.props.history.push('/home');
+        } else {
             this.props.history.push('/home');
         }
     }
 
     onLeaveBox = async () => {
-
+        await this.props.leaveBox({userId: this.props.userId, boxId: this.props.box._id});
+        this.props.history.push('/home/myboxes');
     };
 
     render() {
@@ -41,8 +46,9 @@ class Box extends React.Component {
                             <img src={surprise} alt=""/>
                         </Link>
                         <div className="wr-button wr-button__min">
-                            <Link to="/home/boxpass">
-                                <input type="submit" name="submit" value="Покинуть коробку" className="button"/>
+                            {/*TODO Убрать Link и заменить input button*/}
+                            <Link to="/home/myboxes">
+                                <input type="submit" onClick={this.onLeaveBox} name="submit" value="Покинуть коробку" className="button"/>
                             </Link>
                         </div>
                     </div>
@@ -54,13 +60,14 @@ class Box extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        userId: state.auth.userId,
+        userId: state.auth.id,
         box: state.box.box,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
+        isJoinedToBox: bindActionCreators(isJoinedToBox, dispatch),
         leaveBox: bindActionCreators(leaveBox, dispatch),
     }
 }
