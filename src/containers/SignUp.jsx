@@ -2,26 +2,29 @@ import React, {Component} from 'react';
 import {withRouter, Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {NotificationManager} from 'react-notifications';
+
 import {userSignup} from '../store/actions/auth.actions';
 import '../index.css';
-import surprise from '../img/surprise.png';
-import user from '../img/user.png';
-import mail from '../img/mail.png';
-import key from '../img/key.png';
+import surprise from '../assets/img/surprise.png';
+import user from '../assets/img/user.png';
+import mail from '../assets/img/mail.png';
+import key from '../assets/img/key.png';
 
 
 class SignUp extends Component {
     submitData = async (event) => {
         event.preventDefault();
 
-
         await this.props.userSignup({
             username: event.target.inputLogin.value,
             password: event.target.inputPassword.value,
             email: event.target.inputEmail.value,
-        })
+        });
 
-        //this.props.history.push('/home');
+        NotificationManager.success('Аккаунт создан');
+
+        this.props.history.push('/signin');
     };
 
     render() {
@@ -37,17 +40,17 @@ class SignUp extends Component {
 
                             <div className="registration_input">
                                 <img src={user} alt=""/>
-                                <input type="text" onChange={this.handleNameChange} id="inputLogin" placeholder="Логин"
+                                <input type="text" id="inputLogin" placeholder="Логин"
                                        required/>
                             </div>
                             <div className="registration_input">
                                 <img src={mail} alt=""/>
-                                <input type="email" onChange={this.handleEmailChange} id="inputEmail"
+                                <input type="email" id="inputEmail"
                                        placeholder="E-mail" required/>
                             </div>
                             <div className="registration_input">
                                 <img src={key} alt=""/>
-                                <input type="password" placeholder="Пароль" onChange={this.handlePasswordChange}
+                                <input type="password" placeholder="Пароль"
                                        id="inputPassword" required/>
                             </div>
                             <div className="registration_input registration_pass">

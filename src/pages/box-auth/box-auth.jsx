@@ -1,15 +1,15 @@
 import React from 'react';
-import '../index.css';
-import HeaderBox from "./../components/HeaderBox.jsx";
-import key from '../img/key.png';
-import {downloadBox, joinTheBox, setBoxPassword, isJoinedToBox} from "../store/actions/box.actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {NotificationManager} from "react-notifications";
 import {withRouter} from "react-router-dom";
 
+import HeaderBox from "components/header-box.jsx";
+import key from 'assets/img/key.png';
+import {downloadBox, joinTheBox, setBoxPassword, isJoinedToBox} from "store/actions/box.actions";
 
-class BoxPass extends React.Component {
+
+class BoxAuth extends React.Component {
     async componentDidMount() {
         if (!this.props.box || this.props.box._id !== this.props.match.params.id) {
             await this.props.downloadBox(this.props.match.params.id);
@@ -36,7 +36,7 @@ class BoxPass extends React.Component {
             boxId: this.props.box._id,
             password
         };
-        
+
         const res = await this.props.joinTheBox(data);
 
         if (res.data.isJoin) {
@@ -56,8 +56,8 @@ class BoxPass extends React.Component {
 
         return (
             <div>
-                <HeaderBox time={this.props.box.dateEnd}
-                           count={this.props.box.users.length}
+                <HeaderBox time={this.props.box.dateDistribution}
+                           count={this.props.box.users.filter(item => item.length > 0).length}
                            title={this.props.box.name}
                 />
                 <div className="container">
@@ -97,4 +97,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BoxPass));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BoxAuth));

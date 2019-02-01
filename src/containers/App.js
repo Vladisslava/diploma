@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import {Switch, Router} from 'react-router';
 import PrivateRoute from '../components/private-route';
-import BoxCreate from "../containers/BoxCreate.jsx";
 import Rules from "./Rules";
 import Profile from "./Profile";
 import BoxPerson from "./BoxPerson";
-import MyBoxes from "./MyBoxes";
-import BoxPass from "./BoxPass";
-import Favourite from "./Favourite";
-import Box from "./Box";
-import Menu from "../components/Menu";
-import Home from "./Home/Home.jsx";
+
+import Menu from "components/menu";
+import Home from "pages/home/home";
+import BoxAuth from "pages/box-auth/box-auth";
+import Favourite from "pages/favourite/favourite";
+import MyBoxes from "pages/my-boxes/my-boxes";
+import BoxCreate from "pages/box-create/box-create";
+import Box from "pages/box/box";
 
 class App extends Component {
     render() {
@@ -19,7 +20,7 @@ class App extends Component {
                 <Router history={this.props.history}>
                     <Switch>
                         <PrivateRoute path='/home/boxcreate' component={BoxCreate}/>
-                        <PrivateRoute exact path='/home/box/:id' component={BoxPass}/>
+                        <PrivateRoute exact path='/home/box/:id' component={BoxAuth}/>
                         <PrivateRoute path='/home/boxperson' component={BoxPerson}/>
                         <PrivateRoute path='/home/profile' component={Profile}/>
                         <PrivateRoute path='/home/myboxes' component={MyBoxes}/>

@@ -1,13 +1,13 @@
 import React from 'react';
-import '../index.css';
-import search from '../img/search.png';
-import Header from "./../components/Header.jsx";
-import {favoriteBox} from "../store/actions/user.actions";
-import {bindActionCreators} from "redux";
-import {connect} from "react-redux";
 import axios from 'axios';
-import {apiConstants} from '../constants/api.constants';
-import BoxItem from "./Home/BoxItem";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+
+import search from 'assets/img/search.png';
+import Header from "components/header.jsx";
+import {favoriteBox} from "store/actions/user.actions";
+import {apiConstants} from 'constants/api.constants';
+import BoxItem from "components/box-item";
 
 class Favourite extends React.Component {
     state = {

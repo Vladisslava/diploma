@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import '../index.css';
-import img from '../img/img.png';
-import upload from '../img/upload.png';
-import Header from "./../components/Header.jsx";
+import img from '../assets/img/img.png';
+import upload from '../assets/img/upload.png';
+import Header from "../components/header.jsx";
 import {updateUser} from '../store/actions/user.actions';
 
 class Profile extends React.Component {

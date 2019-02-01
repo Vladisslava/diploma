@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import '../../index.css';
-import search from '../../assets/img/search.png';
-import Header from "../../components/header.jsx";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {downloadBoxesByPage} from "../../store/actions/box.actions";
-import {favoriteBox} from '../../store/actions/user.actions';
-import BoxItem from "./BoxItem";
 import {Pagination} from 'react-bootstrap';
+
+import {downloadBoxesByPage} from "store/actions/box.actions";
+import {favoriteBox} from 'store/actions/user.actions';
+import Header from "components/header.jsx";
+import BoxItem from "components/box-item";
+import {Search} from 'components/search';
 
 class Home extends React.Component {
     componentDidMount() {
@@ -21,37 +21,23 @@ class Home extends React.Component {
         this.props.downloadBoxesByPage(+event.target.getAttribute('href'));
     };
 
-    onFavorite = (event) => {
-        this.props.favoriteBox({
-            userId: this.props.userId,
-            boxId: event.target.dataset.id
-        });
-    };
-
     render() {
         return (
             <div>
                 <div className="background">
                     <div className="background-mask">
                         <Header title="Surprise"/>
-                        <form className="wr-search" action="">
-                            <input type="text" placeholder="Поиск..."/>
-                            <button type="submit">
-                                <img src={search} alt=""/>
-                            </button>
-                        </form>
+                        <Search/>
                         <div className="container">
                             <div className="wr-boxes">
-                                <Link className="boxes-item__plus" to="/home/boxcreate">
-                                    +
-                                </Link>
-                                {this.props.boxes.map(item => {
-                                    return <BoxItem
-                                        isFavorite={this.props.favoriteBoxes.includes(item._id)}
+                                <Link className="boxes-item__plus" to="/home/boxcreate">+</Link>
+                                {this.props.boxes.map(item => (
+                                    <BoxItem
                                         key={item._id}
+                                        isFavorite={this.props.favoriteBoxes.includes(item._id)}
                                         box={item}
                                     />
-                                })}
+                                ))}
                             </div>
                             {this.props.total !== 0 && (
                                 <Pagination bsSize="large">

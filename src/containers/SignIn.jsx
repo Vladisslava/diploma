@@ -6,9 +6,9 @@ import {userSignin} from '../store/actions/auth.actions';
 import {getUserInfo} from '../store/actions/user.actions';
 
 import '../index.css';
-import surprise from '../img/surprise.png';
-import mail from '../img/mail.png';
-import key from '../img/key.png';
+import surprise from '../assets/img/surprise.png';
+import mail from '../assets/img/mail.png';
+import key from '../assets/img/key.png';
 import {NotificationManager} from 'react-notifications';
 
 class Signin extends Component {

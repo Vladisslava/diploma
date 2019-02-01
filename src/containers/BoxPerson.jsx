@@ -1,7 +1,6 @@
 import React from 'react';
-import '../index.css';
-import HeaderBox from "./../components/HeaderBox.jsx";
-import img from '../img/img.png';
+import HeaderBox from "../components/header-box.jsx";
+import img from '../assets/img/img.png';
 
 
 class BoxPerson extends React.Component {

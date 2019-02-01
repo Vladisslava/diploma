@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import like from '../../assets/img/like.png';
-import emptyLike from '../../assets/img/likee.png';
+import like from '../../img/like.png';
+import emptyLike from '../../img/likee.png';
 import {formatDate} from '../../libs/helpers';
 import {bindActionCreators} from "redux";
 import {favoriteBox} from "../../store/actions/user.actions";

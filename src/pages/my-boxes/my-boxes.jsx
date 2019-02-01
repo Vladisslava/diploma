@@ -1,12 +1,12 @@
 import React from 'react';
-import '../index.css';
-import search from '../img/search.png';
-import Header from "./../components/Header.jsx";
-import axios from 'axios';
-import {apiConstants} from '../constants/api.constants';
 import {connect} from "react-redux";
+import axios from 'axios';
+
+import search from 'assets/img/search.png';
+import Header from "components/header.jsx";
+import {apiConstants} from 'constants/api.constants';
 import {Pagination} from "react-bootstrap";
-import BoxItem from "./Home/BoxItem";
+import BoxItem from "components/box-item";
 
 class MyBoxes extends React.Component {
     state = {
@@ -17,7 +17,7 @@ class MyBoxes extends React.Component {
 
     async downloadFavoriteBoxes (data) {
         const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/user/${this.props.userId}?page${[data]}`);
-        
+
         const {docs, page, pages} = boxes.data.boxes;
 
         this.setState({boxes: docs, page, pages});
