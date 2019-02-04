@@ -30,7 +30,7 @@ class BoxCreate extends React.Component {
             creator: this.props.username
         };
 
-        this.props.createBox(data);
+        await this.props.createBox(data);
         NotificationManager.success('Коробка создана');
         this.props.history.push('/home');
     };

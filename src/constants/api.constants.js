@@ -1,5 +1,5 @@
 const devProtocol = 'http://';
-const devHost = 'localhost';
+const devHost = '192.168.0.102';
 const devPort = ':3010';
 const devPrefix = '/api';
 const devBaseUrl = devProtocol + devHost + devPort + devPrefix;

@@ -21,7 +21,7 @@ class App extends Component {
                     <Switch>
                         <PrivateRoute path='/home/boxcreate' component={BoxCreate}/>
                         <PrivateRoute exact path='/home/box/:id' component={BoxAuth}/>
-                        <PrivateRoute path='/home/boxperson' component={BoxPerson}/>
+                        <PrivateRoute path='/home/boxperson/:boxId' component={BoxPerson}/>
                         <PrivateRoute path='/home/profile' component={Profile}/>
                         <PrivateRoute path='/home/myboxes' component={MyBoxes}/>
                         <PrivateRoute path='/home/favourite' component={Favourite}/>

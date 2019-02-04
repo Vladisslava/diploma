@@ -57,7 +57,7 @@ class BoxAuth extends React.Component {
         return (
             <div>
                 <HeaderBox time={this.props.box.dateDistribution}
-                           count={this.props.box.users.filter(item => item.length > 0).length}
+                           count={this.props.box.users.length}
                            title={this.props.box.name}
                 />
                 <div className="container">

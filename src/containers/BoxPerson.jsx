@@ -1,70 +1,75 @@
 import React from 'react';
-import HeaderBox from "../components/header-box.jsx";
-import img from '../assets/img/img.png';
+import {connect} from 'react-redux';
+import {getWard, downloadBox} from 'store/actions/box.actions';
 
+import HeaderBox from "components/header-box.jsx";
+import img from 'assets/img/img.png';
+
+const mapStateToProps = state => ({
+    ward: state.box.ward,
+    box: state.box.box
+});
+
+const mapDispatchToProps = {
+    getWard,
+    downloadBox
+};
 
 class BoxPerson extends React.Component {
-    render() {
-      return (
-           <div>
-                <HeaderBox/>
+    componentDidMount() {
+        this.props.getWard(this.props.match.params.boxId);
+        this.props.downloadBox(this.props.match.params.boxId);
+    }
 
+    render() {
+        const ward = this.props.ward.user;
+        const box = this.props.box;
+
+        return (
+            <div>
+                <HeaderBox count={box && box.users.length} time={box && box.dateDistribution}/>
                 <div className="container">
                     <div className="wr-box">
-                        <div className="wr-box__description">
-                          <p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error illum, voluptatibus, suscipit libero numquam neque aut dolorum debitis vero impedit voluptatum nihil, delectus sed ullam qui optio excepturi magni laboriosam, dignissimos facilis eaque est a unde!
-                          </p>
-                      </div>
+                        <p className="wr-box__description">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error illum, voluptatibus,
+                            suscipit libero numquam neque aut dolorum debitis vero impedit voluptatum nihil,
+                            delectus sed ullam qui optio excepturi magni laboriosam, dignissimos facilis eaque est a
+                            unde!
+                        </p>
                         <h2 className="title title__blue">Твой подопечный</h2>
                         <div className="profile">
                             <form action="">
                                 <img src={img} alt=""/>
-                                <div className="profile_input">
-                                   <span>Имя</span>
-                                    <input type="text" name="name" placeholder="name"/>
-                                </div>
-                                <div className="profile_input">
-                                   <span>Фамилия</span>
-                                    <input type="text" name="surname" placeholder="surname"/>
-                                </div>
-                                 <div className="profile_input">
-                                   <span>Пол</span>
-                                    <input type="text" name="sex" placeholder="sex"/>
-                                </div>
-                                 <div className="profile_input">
-                                   <span>Год рождения</span>
-                                    <input type="text" name="year" placeholder="year"/>
-                                </div>
-                                <div className="profile_input">
-                                   <span>Номер телефона</span>
-                                    <input type="text" name="number" placeholder="number"/>
-                                </div>
-                                 <div className="profile_input">
-                                   <span>Страна</span>
-                                    <input type="text" name="country" placeholder="country"/>
-                                </div>
-                                 <div className="profile_input">
-                                   <span>Город</span>
-                                    <input type="text" name="city" placeholder="city"/>
-                                </div>
-                                 <div className="profile_input">
-                                   <span>Адрес</span>
-                                    <input type="text" name="adress" placeholder="adress"/>
-                                </div>
-                                 <div className="profile_input">
-                                   <span>Почтовый индекс</span>
-                                    <input type="text" name="index" placeholder="index"/>
-                                </div>
+                                {ward ? claims.map(item => (
+                                    <ProfileClaim key={item.title} label={item.title}>{ward[item.key]}</ProfileClaim>
+                                )) : <div>Звгрузка</div>}
                             </form>
                         </div>
                     </div>
                 </div>
-           </div>
+            </div>
 
-      )
+        )
     }
 }
 
+const claims = [
+    {title: 'Имя', key: 'firstName'},
+    {title: 'Фамилия', key: 'lastName'},
+    {title: 'Пол', key: 'gender'},
+    {title: 'Год рождения', key: 'yearOfBirth'},
+    {title: 'Номер телефона', key: 'phone'},
+    {title: 'Страна', key: 'country'},
+    {title: 'Город', key: 'city'},
+    {title: 'Адрес', key: 'address'},
+    {title: 'Почтовый индекс', key: 'postcode'},
+];
 
-export default BoxPerson;
+const ProfileClaim = ({label, children}) => (
+    <div className="profile_input">
+        <span>{label}</span>
+        <div>{children}</div>
+    </div>
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoxPerson);

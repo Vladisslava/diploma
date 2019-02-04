@@ -1,10 +1,7 @@
-export function formatDate(time) {
-    const date = new Date(time);
-    const day = (date.getDay() + '').padStart(2, '0');
-    const month = (date.getMonth() + '').padStart(2, '0');
-    const year = (date.getFullYear() + '');
+import moment from 'moment';
 
-    return `${day}.${month}.${year}`
+export function formatDate(time) {
+    return moment(time).format('DD.MM.YYYY')
 }
 
 export function buildDataString(data) {

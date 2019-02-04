@@ -1,13 +1,18 @@
-import * as boxesActionConstants from '../../constants/actions/box-actions.constants';
+import * as boxesActionConstants from 'constants/actions/box-actions.constants';
 
 const defaultState = {
     boxes: [],
+    ward: {
+        boxId: undefined,
+        user: undefined
+    },
     box: undefined,
     page: 0,
     pages: 0,
     total: 0,
     boxesIsLoading: false,
-    boxesLoadingFail: false
+    boxesLoadingFail: false,
+
 };
 
 const initialState = {...defaultState};
@@ -18,6 +23,9 @@ export default function (state = initialState, {type, payload}) {
     switch (type) {
         case boxesActionConstants.SET_BOX:
             newState = {...state, box: payload.box};
+            break;
+        case boxesActionConstants.GET_WARD:
+            newState = {...state, ward: payload};
             break;
         case boxesActionConstants.SET_BOXES:
             newState = {

@@ -30,19 +30,17 @@ class Box extends React.Component {
             )
         }
 
-        console.log(this.props.box);
-
         return (
             <div className="wr-box">
                 <HeaderBox time={this.props.box.dateDistribution}
-                           count={this.props.box.users.filter(item => item.length > 0).length}
+                           count={this.props.box.users.length}
                            title={this.props.box.name}/>
                 <div className="wr-box__description">
                     <p>{this.props.box.description}</p>
                 </div>
                 <h2 className="title title__blue">Получить подопечного</h2>
 
-                <Link to="/home/boxperson">
+                <Link to={"/home/boxperson/" + this.props.box._id}>
                     <img src={surprise} alt=""/>
                 </Link>
                 <div className="wr-button wr-button__min">

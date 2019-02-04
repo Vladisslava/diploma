@@ -24,6 +24,9 @@ class Favourite extends React.Component {
         });
 
         const res = await axios.all(requests);
+
+        console.log(res);
+
         this.setState({boxes: res.map(item => item.data.box)})
     }
 
@@ -51,7 +54,10 @@ class Favourite extends React.Component {
                                 {this.state.boxes.map(item => {
                                     return <BoxItem
                                         isFavorite={this.props.favoriteBoxes.includes(item._id)}
-                                        onFavorite={this.onFavorite}
+                                        onFavorite={() => this.onFavorite({
+                                            userId: this.props.userId,
+                                            boxId: item._id
+                                        })}
                                         key={item._id}
                                         box={item}
                                     />
