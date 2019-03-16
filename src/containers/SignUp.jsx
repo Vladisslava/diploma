@@ -53,9 +53,7 @@ class SignUp extends Component {
                                 <input type="password" placeholder="Пароль"
                                        id="inputPassword" required/>
                             </div>
-                            <div className="registration_input registration_pass">
-                                <a href="">Забыли пароль?</a>
-                            </div>
+                           
 
                             <div className="registration_input wr-button wr-button__white">
                                 <button className="button" type="submit">Зарегистрироваться</button>

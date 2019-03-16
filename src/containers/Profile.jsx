@@ -6,6 +6,7 @@ import img from '../assets/img/img.png';
 import upload from '../assets/img/upload.png';
 import Header from "../components/header.jsx";
 import {updateUser} from '../store/actions/user.actions';
+import {NotificationManager} from 'react-notifications';
 
 class Profile extends React.Component {
     onSubmit = async (event) => {
@@ -18,7 +19,7 @@ class Profile extends React.Component {
             lastName: event.target.surname.value,
             gender: event.target.sex.value,
             yearOfBirth: event.target.year.value,
-            phone: event.target.number.value,
+            phone: event.target.phone.value,
             country: event.target.country.value,
             city: event.target.city.value,
             address: event.target.address.value,
@@ -35,6 +36,8 @@ class Profile extends React.Component {
         }
 
         await this.props.updateUser(this.props.userId, req);
+
+        NotificationManager.success('Профиль обновлен');
     };
 
     render() {
@@ -81,15 +84,19 @@ class Profile extends React.Component {
                         </div>
                         <div className="profile_input">
                             <span>Пол</span>
-                            <input defaultValue={gender} type="text" name="sex" placeholder="sex"/>
+                            <select defaultValue={gender} name="sex" size="1">
+                                <option disabled selected>Укажите пол:</option>
+                                <option value="man">Мужской</option>
+                                <option value="second">Женский</option>
+                            </select>
                         </div>
                         <div className="profile_input">
-                            <span>Год рождения</span>
-                            <input defaultValue={yearOfBirth !== 0 ? yearOfBirth : ''} type="text" name="year" placeholder="year"/>
+                            <span>Дата рождения</span>
+                            <input defaultValue={yearOfBirth !== 0 ? yearOfBirth : ''} type="date" name="year" placeholder="year"/>
                         </div>
                         <div className="profile_input">
                             <span>Номер телефона</span>
-                            <input defaultValue={phone} type="text" name="number" placeholder="number"/>
+                            <input defaultValue={phone} type="tel" name="phone" placeholder="phone"/>
                         </div>
                         <div className="profile_input">
                             <span>Страна</span>
@@ -105,7 +112,7 @@ class Profile extends React.Component {
                         </div>
                         <div className="profile_input">
                             <span>Почтовый индекс</span>
-                            <input defaultValue={postcode !== 0 ? postcode : ''} type="text" name="index" placeholder="index"/>
+                            <input defaultValue={postcode !== 0 ? postcode : ''} type="number" name="index" placeholder="index"/>
                         </div>
 
                         <div className="profile_input wr-button">

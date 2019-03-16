@@ -26,4 +26,25 @@ export default new class Authorization {
         return {data: res.data, status: res.status};
     }
 
+    async generateForgotCode (email) {
+        const res = await axios.create({
+            url: apiConstants.forgot,
+            method: 'post',
+            baseURL: apiConstants.baseUrl,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            data: `email=${email}`
+        })();
+
+        return {data: res.data, status: res.status}
+    }
+
+    async restorePassword(email, code, password) {
+        return await axios.create({
+            url: apiConstants.forgot,
+            method: 'put',
+            baseURL: apiConstants.baseUrl,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            data: `email=${email}&code=${code}&password=${password}`
+        })()
+    }
 }();

@@ -36,7 +36,7 @@ class Signin extends Component {
                         <img src={surprise} alt=""/>
 
                         <form className="registration_form" onSubmit={this.signIn}>
-                            <h2 className="title">Авторизация</h2>
+                            <h2 className="title">Вход</h2>
 
                             <div className="registration_input">
                                 <img src={mail} alt=""/>
@@ -49,7 +49,7 @@ class Signin extends Component {
                                        id="inputPassword" required/>
                             </div>
                             <div className="registration_input registration_pass">
-                                <a href="">Забыли пароль?</a>
+                                <Link to="/forgot-password">Забыли пароль?</Link>
                             </div>
 
                             <div className="registration_input wr-button wr-button__white">

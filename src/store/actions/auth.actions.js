@@ -25,6 +25,10 @@ export function registrationFail() {
     return {type: authActions.REGISTRATION_FAIL}
 }
 
+export function userLogout() {
+    return {type: authActions.LOGOUT}
+}
+
 export function userSignin({username, password}) {
     return async (dispatch) => {
         try {
@@ -74,7 +78,22 @@ export function userSignup(userData) {
     }
 }
 
-export function userLogout() {
-    return {type: authActions.LOGOUT}
+export function generateForgotCode(email) {
+    return async dispatch => {
+        try {
+            await authorization.generateForgotCode(email)
+        } catch (e) {
+            console.error(e)
+        }
+    }
 }
 
+export function restorePassword(email, code, password) {
+    return async dispatch => {
+        try {
+            return await authorization.restorePassword(email, code, password);
+        } catch (e) {
+            return e;
+        }
+    };
+}

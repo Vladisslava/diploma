@@ -38,7 +38,7 @@ class Box extends React.Component {
                 <div className="wr-box__description">
                     <p>{this.props.box.description}</p>
                 </div>
-                <h2 className="title title__blue">Получить подопечного</h2>
+                <h2 className="title title__blue">Посмотреть подопечного</h2>
 
                 <Link to={"/home/boxperson/" + this.props.box._id}>
                     <img src={surprise} alt=""/>

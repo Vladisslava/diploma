@@ -16,7 +16,7 @@ class MyBoxes extends React.Component {
     };
 
     async downloadFavoriteBoxes (data) {
-        const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/user/${this.props.userId}?page${[data]}`);
+        const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/user/${this.props.userId}?page=${[data]}`);
 
         const {docs, page, pages} = boxes.data.boxes;
 

@@ -4,13 +4,18 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {Pagination} from 'react-bootstrap';
 
-import {downloadBoxesByPage} from "store/actions/box.actions";
+import {downloadBoxesByPage, searchBoxes} from "store/actions/box.actions";
 import {favoriteBox} from 'store/actions/user.actions';
 import Header from "components/header.jsx";
 import BoxItem from "components/box-item";
 import {Search} from 'components/search';
 
 class Home extends React.Component {
+    state = {
+        searchQuery: '',
+        page: 1
+    };
+
     componentDidMount() {
         this.props.downloadBoxesByPage(1);
     }
@@ -18,22 +23,41 @@ class Home extends React.Component {
     onPaginationClick = (event) => {
         event.preventDefault();
 
-        this.props.downloadBoxesByPage(+event.target.getAttribute('href'));
+        if (this.state.searchQuery.length === 0) {
+            this.props.downloadBoxesByPage(+event.target.getAttribute('href'));
+        } else {
+            this.setState({page: +event.target.getAttribute('href')});
+            this.props.searchBoxes(this.state.searchQuery, 1);
+        }
     };
 
+    handleChangeSearch = searchQuery => {
+        this.setState({searchQuery});
+        this.props.searchBoxes(searchQuery, 1);
+    };
+
+    handleSearch = query => {
+        this.setState({page: 1});
+        this.props.searchBoxes(query, 1);
+    };
+    
     render() {
         return (
             <div>
                 <div className="background">
                     <div className="background-mask">
                         <Header title="Surprise"/>
-                        <Search/>
+                        <Search
+                            onChange={this.handleChangeSearch}
+                            onSearch={this.handleSearch}
+                        />
                         <div className="container">
                             <div className="wr-boxes">
                                 <Link className="boxes-item__plus" to="/home/boxcreate">+</Link>
                                 {this.props.boxes.map(item => (
                                     <BoxItem
                                         key={item._id}
+                                        favoriteBox={() => this.props.favoriteBox({userId: this.props.userId, boxId: item._id})}
                                         isFavorite={this.props.favoriteBoxes.includes(item._id)}
                                         box={item}
                                     />
@@ -74,6 +98,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        searchBoxes: bindActionCreators(searchBoxes, dispatch),
         favoriteBox: bindActionCreators(favoriteBox, dispatch),
         downloadBoxesByPage: bindActionCreators(downloadBoxesByPage, dispatch),
     }

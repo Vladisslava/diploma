@@ -15,6 +15,7 @@ import App from './containers/App';
 import SignIn from "./containers/SignIn.jsx";
 import SignUp from "./containers/SignUp.jsx";
 import Logout from "./containers/Logout.jsx";
+import {ForgotPassword} from "./containers/forgot-password";
 
 const history = createHistory();
 const store = configureStore(history);
@@ -25,6 +26,7 @@ ReactDOM.render([
             <Switch>
                 <Route path='/signup' component={SignUp}/>
                 <Route path='/signin' component={SignIn}/>
+                <Route path='/forgot-password' component={ForgotPassword}/>
                 <PrivateRoute path='/home' component={App}/>
                 <PrivateRoute path='/logout' component={Logout}/>
                 <Redirect exact from="/" to="/home"/>

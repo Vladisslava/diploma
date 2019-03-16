@@ -8,6 +8,7 @@ import HeaderBox from "components/header-box.jsx";
 import key from 'assets/img/key.png';
 import {downloadBox, joinTheBox, setBoxPassword, isJoinedToBox} from "store/actions/box.actions";
 
+const getCode = msg => +(msg + '').split('code ')[1];
 
 class BoxAuth extends React.Component {
     async componentDidMount() {
@@ -38,6 +39,12 @@ class BoxAuth extends React.Component {
         };
 
         const res = await this.props.joinTheBox(data);
+
+        if (getCode(res) === 403)
+            return NotificationManager.error('Заполните всю информацию о себе');
+
+        if (getCode(res) === 401)
+            return NotificationManager.error('Извините, но закончилось время распределения');
 
         if (res.data.isJoin) {
             this.props.setBoxPassword(password);

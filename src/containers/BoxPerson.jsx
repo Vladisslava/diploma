@@ -42,7 +42,7 @@ class BoxPerson extends React.Component {
                                 <img src={img} alt=""/>
                                 {ward ? claims.map(item => (
                                     <ProfileClaim key={item.title} label={item.title}>{ward[item.key]}</ProfileClaim>
-                                )) : <div>Звгрузка</div>}
+                                )) : <div>Загрузка</div>}
                             </form>
                         </div>
                     </div>

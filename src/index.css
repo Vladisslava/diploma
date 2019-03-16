@@ -114,7 +114,7 @@ a:hover {
     margin-top: 20px;
     -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: lighter;
 
 }
@@ -297,26 +297,39 @@ a:hover {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -ms-flex-pack: distribute;
     justify-content: space-around;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     /*height: 100vw;*/
     position: relative;
 }
 
 .boxes-item {
+    -ms-flex-preferred-size: 47%;
     flex-basis: 47%;
     color: #fff;
     padding: 10px;
     height: 35vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
     align-items: stretch;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
     justify-content: flex-end;
     margin-bottom: 10px;
     border-radius: 6px 6px 0px 6px;
+    -webkit-box-shadow: 0px 1px 2px 0 #333337;
     box-shadow: 0px 1px 2px 0 #333337;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     background: #fff;
+    -webkit-transition: all .2s;
     transition: all .2s;
 }
 
@@ -333,11 +346,13 @@ a:hover {
 }*/
 .boxes-item__img {
     position: relative;
+    -ms-flex-preferred-size: 20%;
     flex-basis: 20%;
 }
 
 .boxes-item__img img {
     max-width: 32px;
+    -webkit-filter: grayscale(1);
     filter: grayscale(1);
     cursor: pointer;
     opacity: 0;
@@ -619,7 +634,7 @@ a:hover {
     text-align: left;
 }
 
-.profile_input input {
+.profile_input input, .profile_input select {
     border: none;
     text-align: right;
     color: black;
@@ -629,6 +644,9 @@ a:hover {
     font-weight: bold;
     width: 60%;
 }
+.profile_input select {
+    width: auto;
+}
 
 .profile_input input[type="checkbox"] {
     width: auto;
@@ -637,7 +655,11 @@ a:hover {
 /*page box*/
 .box-info {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
@@ -647,8 +669,14 @@ a:hover {
 
 .box-item__footer {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
@@ -656,14 +684,19 @@ a:hover {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-pack: distribute;
     justify-content: space-around;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding-bottom: 30px;
 }
 
 .box-desc__name {
     color: #fff;
+    -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
 }
 

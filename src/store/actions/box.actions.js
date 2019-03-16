@@ -36,6 +36,14 @@ export function boxesLoadSuccess() {
     return {type: boxesActionConstants.BOXES_LOADING_SUCCESS}
 }
 
+export function searchBoxes(query, page) {
+    return async dispatch => {
+        const res = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/search?query=${query}&page=${page}`);
+
+        dispatch(setBoxes({boxes: res.data}))
+    }
+}
+
 export function downloadBoxesByPage(page) {
     return async (dispatch) => {
         dispatch(boxesLoadStart());
@@ -108,6 +116,7 @@ export function joinTheBox(data) {
             return res;
         } catch (e) {
             console.log(e);
+            return e;
         }
     }
 }
