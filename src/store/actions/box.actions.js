@@ -81,24 +81,22 @@ export function downloadBox(id) {
 
 export function createBox(data) {
     return async (dispatch) => {
-        try {
-            const res = await axios.create({
-                url: apiConstants.box,
-                method: 'post',
-                baseURL: apiConstants.baseUrl,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                data: buildDataString({
-                    ...data,
-                    users: [],
-                    dateEnd: formatDate(data.dateEnd),
-                    dateDistribution: formatDate(data.dateDistribution),
-                })
-            })();
+        const res = await axios.create({
+            url: apiConstants.box,
+            method: 'post',
+            baseURL: apiConstants.baseUrl,
+            data: {
+                ...data,
+                dateEnd: formatDate(data),
+                dateDistribution: formatDate(data.dateDistribution),
+            }
+        })();
 
-            return res;
-        } catch (e) {
-            console.log(e);
-        }
+        dispatch({
+            type: boxesActionConstants.CREATE_BOX,
+            payload: res.data.box,
+        });
+        return res;
     }
 }
 
@@ -112,6 +110,11 @@ export function joinTheBox(data) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                 data: buildDataString(data)
             })();
+
+            dispatch({
+                type: boxesActionConstants.BOX_JOIN,
+                payload: data
+            });
 
             return res;
         } catch (e) {
@@ -153,13 +156,18 @@ export function getWard(box) {
 export function leaveBox(data) {
     return async (dispatch) => {
         try {
-            return await axios.create({
+            await axios.create({
                 method: 'post',
                 url: apiConstants.box + '/leave',
                 baseURL: apiConstants.baseUrl,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                 data: buildDataString(data)
             })();
+
+            dispatch({
+                type: boxesActionConstants.BOX_LEAVE,
+                payload: data,
+            })
         } catch (e) {
             console.log(e);
         }

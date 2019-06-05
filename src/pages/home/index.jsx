@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import {Switch, Router} from 'react-router';
-import PrivateRoute from '../components/private-route';
-import Rules from "./Rules";
-import Profile from "./Profile";
-import BoxPerson from "./BoxPerson";
+import PrivateRoute from 'components/private-route';
+import Rules from "./pages/rules";
+import Profile from "./pages/profile";
+import BoxPerson from "./pages/box-person";
 
 import Menu from "components/menu";
-import Home from "pages/home/home";
-import BoxAuth from "pages/box-auth/box-auth";
-import Favourite from "pages/favourite/favourite";
-import MyBoxes from "pages/my-boxes/my-boxes";
-import BoxCreate from "pages/box-create/box-create";
-import Box from "pages/box/box";
+import Home from "./home";
+import BoxAuth from "./pages/box-auth";
+import Favourite from "./pages/favourite";
+import MyBoxes from "./pages/my-boxes";
+import BoxCreate from "./pages/box-create";
+import Box from "./pages/box";
 
 class App extends Component {
     render() {

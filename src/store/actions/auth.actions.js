@@ -1,5 +1,5 @@
 import * as authActions from '../../constants/actions/auth-actions.constants';
-import authorization from "../../services/auth.service";
+import authorization from "../../libs/auth.service";
 
 export function loginStart() {
     return {type: authActions.LOGIN_START}
@@ -64,16 +64,22 @@ export function userSignup(userData) {
             if (data.status === 201) {
                 dispatch(registrationSuccess());
 
-                return true;
+                return {error: false, msg: data.data.msg};
             } else {
                 dispatch(registrationFail());
 
-                return false;
+                return {
+                    error: true,
+                    msg: data.data.msg,
+                };
             }
         } catch (e) {
             dispatch(registrationFail());
 
-            return false;
+            return {
+                error: true,
+                msg: e.response ? e.response.data.msg : 'Проблемы с соеденением',
+            };
         }
     }
 }

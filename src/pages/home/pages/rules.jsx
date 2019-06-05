@@ -1,6 +1,6 @@
 import React from 'react';
-import '../index.css';
-import Header from "../components/header.jsx";
+import 'index.css';
+import Header from "components/header.jsx";
 
 class Rules extends React.Component {
     render() {

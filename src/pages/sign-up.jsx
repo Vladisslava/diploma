@@ -11,20 +11,23 @@ import user from '../assets/img/user.png';
 import mail from '../assets/img/mail.png';
 import key from '../assets/img/key.png';
 
-
 class SignUp extends Component {
     submitData = async (event) => {
         event.preventDefault();
 
-        await this.props.userSignup({
+        const res = await this.props.userSignup({
             username: event.target.inputLogin.value,
             password: event.target.inputPassword.value,
             email: event.target.inputEmail.value,
         });
 
-        NotificationManager.success('Аккаунт создан');
+        if (res.error) {
+            NotificationManager.error(res.msg);
+        } else {
+            NotificationManager.success('Аккаунт создан');
 
-        this.props.history.push('/signin');
+            this.props.history.push('/signin');
+        }
     };
 
     render() {

@@ -7,17 +7,17 @@ import PrivateRoute from 'components/private-route';
 import './index.css';
 import 'react-notifications/lib/notifications.css';
 import registerServiceWorker from './registerServiceWorker';
-import createHistory from 'history/createBrowserHistory';
+import {createBrowserHistory} from 'history';
 import configureStore from 'store/configureStore';
 import {NotificationContainer} from 'react-notifications';
 
-import App from './containers/App';
-import SignIn from "./containers/SignIn.jsx";
-import SignUp from "./containers/SignUp.jsx";
-import Logout from "./containers/Logout.jsx";
-import {ForgotPassword} from "./containers/forgot-password";
+import Home from './pages/home';
+import SignIn from "./pages/sign-in";
+import SignUp from "./pages/sign-up";
+import Logout from "./pages/logout";
+import {ForgotPassword} from "./pages/forgot-password";
 
-const history = createHistory();
+const history = createBrowserHistory();
 const store = configureStore(history);
 
 ReactDOM.render([
@@ -27,7 +27,7 @@ ReactDOM.render([
                 <Route path='/signup' component={SignUp}/>
                 <Route path='/signin' component={SignIn}/>
                 <Route path='/forgot-password' component={ForgotPassword}/>
-                <PrivateRoute path='/home' component={App}/>
+                <PrivateRoute path='/home' component={Home}/>
                 <PrivateRoute path='/logout' component={Logout}/>
                 <Redirect exact from="/" to="/home"/>
             </Switch>

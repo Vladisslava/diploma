@@ -5,3 +5,6 @@ export const BOXES_LOADING = 'BOXES_LOADING';
 export const BOXES_LOADING_FAIL = 'BOXES_LOADING_FAIL';
 export const BOXES_LOADING_SUCCESS = 'BOXES_LOADING_SUCCESS';
 export const GET_WARD = 'GET_WARD';
+export const BOX_JOIN = 'BOX_JOIN';
+export const BOX_LEAVE = 'BOX_LEAVE';
+export const CREATE_BOX = 'CREATE_BOX';

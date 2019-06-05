@@ -25,12 +25,22 @@ class BoxCreate extends React.Component {
             dateDistribution: Date.parse(event.target.dateDistribution.value),
             isPrivate: this.state.isPrivate,
             password: password,
-            users: [],
+            users: [{user: this.props.userId, ward: null}],
             description: '',
             creator: this.props.username
         };
 
-        await this.props.createBox(data);
+        if (!data.dateEnd || !data.dateDistribution) {
+            return NotificationManager.error('Заполните все поля');
+        }
+
+        try {
+            console.log(data);
+            await this.props.createBox(data);
+        } catch (e) {
+            return NotificationManager.error('Ошибка, попробуйте еще раз');
+        }
+
         NotificationManager.success('Коробка создана');
         this.props.history.push('/home');
     };

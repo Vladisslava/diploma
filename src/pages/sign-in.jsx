@@ -11,7 +11,7 @@ import mail from '../assets/img/mail.png';
 import key from '../assets/img/key.png';
 import {NotificationManager} from 'react-notifications';
 
-class Signin extends Component {
+class SignIn extends Component {
     signIn = async (event) => {
         event.preventDefault();
 
@@ -82,4 +82,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Signin));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn));

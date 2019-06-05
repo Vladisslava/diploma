@@ -21,6 +21,9 @@ export default function (state = initialState, {type, payload}) {
     let newState;
 
     switch (type) {
+        case boxesActionConstants.CREATE_BOX:
+            newState = {...state, boxes: [...state.boxes, payload]};
+            break;
         case boxesActionConstants.SET_BOX:
             newState = {...state, box: payload.box};
             break;
@@ -51,6 +54,29 @@ export default function (state = initialState, {type, payload}) {
             break;
         case boxesActionConstants.BOXES_LOADING_FAIL:
             newState = {...state, boxesLoadingFail: true, boxesIsLoading: false};
+            break;
+        case boxesActionConstants.BOX_JOIN:
+            newState = {
+                ...state, box: {
+                    ...state.box,
+                    users: [...state.box.users, payload]
+                }
+            };
+            break;
+        case boxesActionConstants.BOX_LEAVE:
+            newState = {
+                ...state,
+                boxes: state.boxes.map(item => {
+                    if (item._id === payload.boxId) {
+                        return {
+                            ...item,
+                            users: item.users.filter(item => item.user !== payload.userId),
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            };
             break;
         default:
             newState = {...state};

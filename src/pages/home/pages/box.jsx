@@ -20,7 +20,7 @@ class Box extends React.Component {
 
     onLeaveBox = async () => {
         await this.props.leaveBox({userId: this.props.userId, boxId: this.props.box._id});
-        this.props.history.push('/home/myboxes');
+        this.props.history.push('/home');
     };
 
     render() {
@@ -45,7 +45,7 @@ class Box extends React.Component {
                 </Link>
                 <div className="wr-button wr-button__min">
                     {/*TODO Убрать Link и заменить input button*/}
-                    <Link to="/home/myboxes">
+                    <Link to="/home">
                         <input type="submit" onClick={this.onLeaveBox} name="submit" value="Покинуть коробку"
                                className="button"/>
                     </Link>
