@@ -6,9 +6,11 @@ export default new class Authorization {
         const res = await axios.create({
             url: apiConstants.signinUrl,
             method: 'post',
+            mode: 'no-cors',
             baseURL: apiConstants.baseUrl,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            data: `username=${username}&password=${password}`
+            data: {
+                username, password
+            }
         })();
         
         return {data: res.data, status: res.status};
@@ -17,10 +19,12 @@ export default new class Authorization {
     async registration (username, email, password) {
         const res = await axios.create({
             url: apiConstants.signupUrl,
+            mode: 'no-cors',
             method: 'post',
             baseURL: apiConstants.baseUrl,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            data: `username=${username}&password=${password}&email=${email}`
+            data: {
+                username, email, password
+            }
         })();
 
         return {data: res.data, status: res.status};
@@ -31,8 +35,7 @@ export default new class Authorization {
             url: apiConstants.forgot,
             method: 'post',
             baseURL: apiConstants.baseUrl,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            data: `email=${email}`
+            data: {email}
         })();
 
         return {data: res.data, status: res.status}
@@ -43,8 +46,10 @@ export default new class Authorization {
             url: apiConstants.forgot,
             method: 'put',
             baseURL: apiConstants.baseUrl,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            data: `email=${email}&code=${code}&password=${password}`
+            data: {
+                email, code, password
+            },
+            mode: 'no-cors'
         })()
     }
 }();
