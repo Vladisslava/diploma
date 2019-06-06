@@ -3,7 +3,7 @@ import '../index.css';
 
 import menu from '../assets/img/menu.png';
 import surprise from '../assets/img/surprise.png';
-import {menuOpen} from "../store/actions/menu.acrions";
+import {menuOpen} from "../store/actions/menu.actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 

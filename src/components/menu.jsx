@@ -8,7 +8,7 @@ import logout from '../assets/img/logout.png';
 import favourite from '../assets/img/favourite.png';
 import mybox from '../assets/img/mybox.png';
 import rules from '../assets/img/rules.png';
-import {menuClose} from "../store/actions/menu.acrions";
+import {menuClose} from "../store/actions/menu.actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
