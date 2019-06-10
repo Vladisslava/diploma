@@ -2,6 +2,10 @@ import React, {Component, useState} from 'react';
 import {connect} from 'react-redux';
 
 import {generateForgotCode, restorePassword} from 'store/actions/auth.actions';
+import surprise from "../assets/img/surprise.png";
+import mail from "../assets/img/mail.png";
+import key from "../assets/img/key.png";
+import {Link} from "react-router-dom";
 
 const mapDispatchToProps = {
     generateForgotCode,
@@ -73,40 +77,90 @@ const RestorePassword = ({onRestore}) => {
     const handleInput = setValue => event => setValue(event.target.value);
 
     return (
-        <div>
-            <input
-                type="text"
-                value={code}
-                onChange={handleInput(setCode)}
-                placeholder="Введите код"
-            />
-            <input
-                type="password"
-                value={password}
-                onChange={handleInput(setPassword)}
-                placeholder="Пароль"
-            />
-            <input
-                type="password"
-                value={repeatPassword}
-                onChange={handleInput(setRepeatPassword)}
-                placeholder="Повторите пароль"
-            />
-            <button onClick={() => onRestore({code, password, repeatPassword})}>Восстановить</button>
+        <div className="background">
+            <div className="registration background-mask">
+                <div className="container">
+                    <img src={surprise} alt=""/>
+
+                    <form className="registration_form" onSubmit={this.signIn}>
+                        <h2 className="title">Новый пароль</h2>
+                        <div className="registration_input">
+                            <input
+                                type="text"
+                                value={code}
+                                onChange={handleInput(setCode)}
+                                placeholder="Введите код"
+                            />
+                        </div>
+                        <div className="registration_input">
+                            <img src={key} alt=""/>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={handleInput(setPassword)}
+                                placeholder="Пароль"
+                            />
+                        </div>
+                        <div className="registration_input">
+                            <img src={key} alt=""/>
+                            <input
+                                type="password"
+                                value={repeatPassword}
+                                onChange={handleInput(setRepeatPassword)}
+                                placeholder="Повторите пароль"
+                            />
+                        </div>
+                        <div className="registration_input registration_pass">
+                            <Link to="/forgot-password">Забыли пароль?</Link>
+                        </div>
+
+                        <div className="registration_input wr-button wr-button__white">
+                            <button className="button" onClick={() => onRestore({code, password, repeatPassword})}>Восстановить</button>
+                        </div>
+
+                        <div className="registration_login">
+                            Ещё не зарегистрированы?
+                            <Link to="/signup"> Cоздать аккаунт</Link>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 };
 
 const EmailInput = ({email, handleInputEmail, handleRestore}) => (
-    <div>
-        <h3>Забыли пароль?</h3>
-        <input
-            type="email"
-            value={email}
-            onChange={handleInputEmail}
-            placeholder="Введите свой эмейл"
-        />
-        <button onClick={handleRestore}>Восстановить</button>
+    <div className="background">
+        <div className="registration background-mask">
+            <div className="container">
+                <img src={surprise} alt=""/>
+
+                <form className="registration_form" onSubmit={e => e.preventDefault()}>
+                    <h2 className="title">Восстановить парль</h2>
+                    <div className="registration_input">
+                        <img src={mail} alt=""/>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={handleInputEmail}
+                            placeholder="Введите свой эмейл"
+                        />
+                    </div>
+                    <div className="registration_input registration_pass">
+                        <Link to="/forgot-password">Забыли пароль?</Link>
+                    </div>
+
+                    <div className="registration_input wr-button wr-button__white">
+                        <button className="button" onClick={handleRestore}>Восстановить</button>
+                    </div>
+
+                    <div className="registration_login">
+                        Ещё не зарегистрированы?
+                        <Link to="/signup"> Cоздать аккаунт</Link>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 );
 

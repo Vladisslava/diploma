@@ -38,7 +38,9 @@ export function boxesLoadSuccess() {
 
 export function searchBoxes(query, page) {
     return async dispatch => {
-        const res = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/search?query=${query}&page=${page}`);
+        const res = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/search?query=${query}&page=${page}`, {
+            mode: 'no-cors',
+        });
 
         dispatch(setBoxes({boxes: res.data}))
     }
@@ -49,7 +51,9 @@ export function downloadBoxesByPage(page) {
         dispatch(boxesLoadStart());
 
         try {
-            const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/all/${page}`);
+            const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/all/${page}`, {
+                mode: 'no-cors',
+            });
             
             dispatch(boxesLoadSuccess());
             dispatch(setBoxes(boxes.data));
@@ -67,7 +71,9 @@ export function downloadBox(id) {
 
         try {
             const user = getState().auth.id;
-            const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/${id}?user=${user}`);
+            const boxes = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/${id}?user=${user}`, {
+                mode: 'no-cors',
+            });
 
             dispatch(boxesLoadSuccess());
             dispatch(setBox(boxes.data));
@@ -85,6 +91,7 @@ export function createBox(data) {
             url: apiConstants.box,
             method: 'post',
             baseURL: apiConstants.baseUrl,
+            mode: 'no-cors',
             data: {
                 ...data,
                 dateEnd: formatDate(data),
@@ -107,8 +114,8 @@ export function joinTheBox(data) {
                 url: apiConstants.box + '/join',
                 method: 'post',
                 baseURL: apiConstants.baseUrl,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                data: buildDataString(data)
+                mode: 'no-cors',
+                data
             })();
 
             dispatch({
@@ -126,7 +133,9 @@ export function joinTheBox(data) {
 
 export function isJoinedToBox(data) {
     return async dispatch => {
-        const res = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/join?${buildDataString(data)}`);
+        const res = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/join?${buildDataString(data)}`, {
+            mode: 'no-cors',
+        });
 
         return res.data.isJoined;
     }
@@ -137,6 +146,7 @@ export function getWard(box) {
         const userId = getState().auth.id;
 
         const res = await axios.get(`${apiConstants.baseUrl}${apiConstants.box}/ward`, {
+            mode: 'no-cors',
             params: {
                 user: userId,
                 box
@@ -160,8 +170,8 @@ export function leaveBox(data) {
                 method: 'post',
                 url: apiConstants.box + '/leave',
                 baseURL: apiConstants.baseUrl,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                data: buildDataString(data)
+                mode: 'no-cors',
+                data
             })();
 
             dispatch({

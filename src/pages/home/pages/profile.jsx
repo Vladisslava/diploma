@@ -5,10 +5,17 @@ import 'index.css';
 import img from 'assets/img/img.png';
 import upload from 'assets/img/upload.png';
 import Header from "components/header.jsx";
-import {updateUser} from 'store/actions/user.actions';
+import {updateUser, updateUserPhoto} from 'store/actions/user.actions';
 import {NotificationManager} from 'react-notifications';
+import {staticHost} from 'constants/api.constants';
 
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.fileInput = React.createRef();
+    }
+
     onSubmit = async (event) => {
         event.preventDefault();
 
@@ -40,8 +47,23 @@ class Profile extends React.Component {
         NotificationManager.success('Профиль обновлен');
     };
 
+    handleChangePhoto = async () => {
+        if (this.fileInput.current.files.length !== 0) {
+            try {
+                await this.props.updateUserPhoto({
+                    id: this.props.userId,
+                    file: this.fileInput.current.files[0]
+                });
+
+                NotificationManager.success('Фото обновлено');
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    };
+
     render() {
-        let {username, email, firstName, lastName, gender, yearOfBirth, phone, country, city, address, postcode} = this.props.user;
+        let {username, email, firstName, lastName, gender, yearOfBirth, phone, photo, country, city, address, postcode} = this.props.user;
 
         return (
             <div>
@@ -49,13 +71,14 @@ class Profile extends React.Component {
                     <div className="header_profile">
                         <Header title="Profile"/>
                         <div className="profile__photo">
-                            <div className="profile__img">
-                                <img src={img} alt=""/>
+                            <label className="profile__img" htmlFor="photo">
+                                <div className="avatar" style={{backgroundImage: `url(${staticHost + photo})`}}/>
+                                <input type="file" onChange={this.handleChangePhoto} className="hidden" ref={this.fileInput} id="photo"/>
                                 <div className="profile__img-mask">
                                     <img src={upload} alt=""/>
                                 </div>
 
-                            </div>
+                            </label>
 
                         </div>
                     </div>
@@ -84,8 +107,8 @@ class Profile extends React.Component {
                         </div>
                         <div className="profile_input">
                             <span>Пол</span>
-                            <select defaultValue={gender} name="sex" size="1">
-                                <option disabled selected>Укажите пол:</option>
+                            <select value={gender} onChange={() => {}} name="sex" size="1">
+                                <option disabled>Укажите пол:</option>
                                 <option value="man">Мужской</option>
                                 <option value="second">Женский</option>
                             </select>
@@ -136,6 +159,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         updateUser: bindActionCreators(updateUser, dispatch),
+        updateUserPhoto: bindActionCreators(updateUserPhoto, dispatch),
     }
 }
 

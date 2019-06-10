@@ -13,8 +13,7 @@ export function updateUser(id, data) {
             url: apiConstants.user + '/' + id,
             method: 'put',
             baseURL: apiConstants.baseUrl,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            data: buildDataString(data)
+            data
         })();
 
         dispatch(updateUserInfo({user: data}));
@@ -33,6 +32,25 @@ export function updateFavoriteBox(payload) {
     return {type: userActions.UPDATE_FAVORITE_BOX, payload}
 }
 
+export function updateUserPhoto(payload) {
+    return async dispatch => {
+        const formData = new FormData();
+        formData.append("file", payload.file);
+
+        const res = await axios.post(`${apiConstants.baseUrl}/user/${payload.id}/photo/`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
+        console.log(res.data.image);
+        dispatch({
+            type: userActions.UPDATE_USER_PHOTO,
+            payload: res.data.image,
+        })
+    };
+}
+
 export function favoriteBox(data) {
     return async (dispatch) => {
         try {
@@ -40,8 +58,7 @@ export function favoriteBox(data) {
                 url: apiConstants.box + '/favorite',
                 method: 'post',
                 baseURL: apiConstants.baseUrl,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                data: buildDataString(data)
+                data
             })();
 
             dispatch(updateFavoriteBox(res.data.favoritesBox))

@@ -73,6 +73,21 @@ a:hover {
     text-decoration: underline;
 }
 
+.avatar {
+    width: 140px;
+    height: 140px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.avatar-small {
+    width: 56px;
+    height: 56px;
+}
+
 .registration {
     font-family: Open Sans;
     height: 100vh;

@@ -9,9 +9,24 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="%PUBLIC_URL%/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="%PUBLIC_URL%/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="%PUBLIC_URL%/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="%PUBLIC_URL%/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="%PUBLIC_URL%/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="%PUBLIC_URL%/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="%PUBLIC_URL%/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="%PUBLIC_URL%/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <script type="text/javascript" src="//www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -22,20 +37,9 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--<script src="%PUBLIC_URL%/sw.js"></script>-->
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="%PUBLIC_URL%/sw.js"></script>
-
-    <title>React App</title>
+    <title>Surprise</title>
     <style type="text/css">
         .load {
             height: 100vh;
@@ -73,16 +77,83 @@
     </style>
 </head>
 <body>
-<noscript>
-    You need to enable JavaScript to run this app.
-</noscript>
-<div id="root">
-    <div class="load">
-        <!--<img class="load-img" src="../src/img/surprise.png" alt="">-->
-        <img class="load-img" src="/static/media/surprise.12b89691.png" alt="">
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+        <div class="load">
+            <!--<img class="load-img" src="../src/img/surprise.png" alt="">-->
+            <img class="load-img" src="/static/media/surprise.12b89691.png" alt="">
 
+        </div>
     </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script>
+        firebase.initializeApp({
+            messagingSenderId: '56217340757'
+        });
 
-</div>
+        // браузер поддерживает уведомления
+        // вообще, эту проверку должна делать библиотека Firebase, но она этого не делает
+
+        const getToken = (messaging) => {
+            messaging.requestPermission()
+                .then(function () {
+                    // получаем ID устройства
+                    messaging.getToken()
+                        .then(function (currentToken) {
+                            console.log(currentToken);
+
+                            if (currentToken) {
+                                localStorage.setItem('MESSAGE_TOKEN', currentToken)
+                                // sendTokenToServer(currentToken);
+                            } else {
+                                console.warn('Не удалось получить токен.');
+                                // setTokenSentToServer(false);
+                            }
+                        })
+                        .catch(function (err) {
+                            console.warn('При получении токена произошла ошибка.', err);
+                            // setTokenSentToServer(false);
+                        });
+                })
+                .catch(function (err) {
+                    console.warn('Не удалось получить разрешение на показ уведомлений.', err);
+                });
+        };
+
+        if ('Notification' in window) {
+            const messaging = firebase.messaging();
+
+            if (window.Notification && Notification.permission !== "denied") {
+                Notification.requestPermission((status) => {
+                    getToken(messaging);
+
+                    // status is "granted", if accepted by user
+                    /*const n = new Notification('Title', {
+                        body: 'I am the body text!',
+                        icon: '/path/to/icon.png' // optional
+                    })*/
+                })
+            }
+
+            // пользователь уже разрешил получение уведомлений
+            // подписываем на уведомления если ещё не подписали
+
+            // по клику, запрашиваем у пользователя разрешение на уведомления
+            // и подписываем его
+            // $('#subscribe').on('click', function () {
+            //     subscribe();
+            // });
+        }
+    </script>
 </body>
 </html>

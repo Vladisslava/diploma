@@ -6,13 +6,13 @@ import {Router} from 'react-router';
 import './index.css';
 import 'react-notifications/lib/notifications.css';
 import registerServiceWorker from './registerServiceWorker';
-import {createBrowserHistory} from 'history';
+import {createHashHistory} from 'history';
 import configureStore from 'store/configure-store';
 import {NotificationContainer} from 'react-notifications';
 
 import {App} from 'pages';
 
-const history = createBrowserHistory();
+const history = createHashHistory();
 const store = configureStore(history);
 
 ReactDOM.render([

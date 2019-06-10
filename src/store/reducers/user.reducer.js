@@ -8,6 +8,7 @@ const defaultState = {
     gender: undefined,
     yearOfBirth: undefined,
     phone: undefined,
+    photo: undefined,
     country: undefined,
     city: undefined,
     address: undefined,
@@ -27,6 +28,9 @@ export default function (state = initialState, {type, payload}) {
             break;
         case userActions.UPDATE_USER_INFO:
             newState = {...state, ...payload.user};
+            break;
+        case userActions.UPDATE_USER_PHOTO:
+            newState = {...state, photo: payload};
             break;
         default:
             newState = state;

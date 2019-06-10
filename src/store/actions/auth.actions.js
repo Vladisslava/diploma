@@ -26,6 +26,7 @@ export function registrationFail() {
 }
 
 export function userLogout() {
+    localStorage.setItem('MESSAGE_TOKEN', null);
     return {type: authActions.LOGOUT}
 }
 

@@ -11,6 +11,7 @@ import rules from '../assets/img/rules.png';
 import {menuClose} from "../store/actions/menu.actions";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {staticHost} from 'constants/api.constants';
 
 class Menu extends React.Component {
     onClick = () => {
@@ -22,7 +23,8 @@ class Menu extends React.Component {
             username,
             firstName,
             lastName,
-            address
+            address,
+            photo,
         } = this.props.user;
 
         return (
@@ -30,7 +32,7 @@ class Menu extends React.Component {
                 <div className={"wr-menu" + (this.props.isOpen ? ' active' : '')}>
                     <div className="wr-menu__header">
                         <div className="wr-menu__header-mask">
-                            <img src={img} alt=""/>
+                            <div className="avatar avatar-small" style={{backgroundImage: `url(${staticHost + photo})`}}/>
                             <p className="wr-menu__name">{
                                 firstName === '' || lastName  === '' ? username : firstName + ' ' + lastName
                             }</p>
@@ -86,7 +88,8 @@ function mapStateToProps(state) {
             username: state.user.username,
             firstName: state.user.firstName,
             lastName: state.user.lastName,
-            address: state.user.address
+            address: state.user.address,
+            photo: state.user.photo,
         },
         isOpen: state.menu.isOpen
     }

@@ -9,7 +9,7 @@ export default new class Authorization {
             mode: 'no-cors',
             baseURL: apiConstants.baseUrl,
             data: {
-                username, password
+                username, password, messageToken: localStorage.getItem('MESSAGE_TOKEN')
             }
         })();
         
@@ -34,6 +34,7 @@ export default new class Authorization {
         const res = await axios.create({
             url: apiConstants.forgot,
             method: 'post',
+            mode: 'no-cors',
             baseURL: apiConstants.baseUrl,
             data: {email}
         })();
@@ -49,7 +50,7 @@ export default new class Authorization {
             data: {
                 email, code, password
             },
-            mode: 'no-cors'
+            mode: 'no-cors',
         })()
     }
 }();
