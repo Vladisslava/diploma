@@ -4,6 +4,10 @@ import axios from 'axios';
 import {buildDataString} from 'libs/helpers';
 import moment from 'moment';
 
+const request = axios.create({
+    baseURL: apiConstants.baseUrl,
+});
+
 function timezoneOffset() {
     return new Date().getTimezoneOffset() / 60
 }
@@ -105,6 +109,17 @@ export function createBox(data) {
         });
         return res;
     }
+}
+
+export function updateBox(payload) {
+    return async (dispatch) => {
+        const res = await request.put(`${apiConstants.box}/${payload.id}`, payload.data);
+
+        dispatch({
+            type: boxesActionConstants.UPDATE_BOX,
+            payload: res.data,
+        })
+    };
 }
 
 export function joinTheBox(data) {

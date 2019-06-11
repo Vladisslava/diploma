@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {Pagination} from 'react-bootstrap';
 
 import {downloadBoxesByPage, searchBoxes} from "store/actions/box.actions";
-import {favoriteBox} from 'store/actions/user.actions';
+import {favoriteBox, getUserInfo} from 'store/actions/user.actions';
 import Header from "components/header.jsx";
 import BoxItem from "components/box-item";
 import {Search} from 'components/search';
@@ -18,6 +18,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.downloadBoxesByPage(1);
+        this.props.getUserInfo(this.props.userId);
     }
 
     onPaginationClick = (event) => {
@@ -101,6 +102,7 @@ function mapDispatchToProps(dispatch) {
         searchBoxes: bindActionCreators(searchBoxes, dispatch),
         favoriteBox: bindActionCreators(favoriteBox, dispatch),
         downloadBoxesByPage: bindActionCreators(downloadBoxesByPage, dispatch),
+        getUserInfo: bindActionCreators(getUserInfo, dispatch),
     }
 }
 

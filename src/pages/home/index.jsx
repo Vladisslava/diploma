@@ -12,6 +12,7 @@ import Favourite from "./pages/favourite";
 import MyBoxes from "./pages/my-boxes";
 import BoxCreate from "./pages/box-create";
 import Box from "./pages/box";
+import BoxEdit from "./pages/box-edit";
 
 class App extends Component {
     render() {
@@ -21,6 +22,7 @@ class App extends Component {
                     <Switch>
                         <PrivateRoute path='/home/boxcreate' component={BoxCreate}/>
                         <PrivateRoute exact path='/home/box/:id' component={BoxAuth}/>
+                        <PrivateRoute exact path='/home/box-edit/:id' component={BoxEdit}/>
                         <PrivateRoute path='/home/boxperson/:boxId' component={BoxPerson}/>
                         <PrivateRoute path='/home/profile' component={Profile}/>
                         <PrivateRoute path='/home/myboxes' component={MyBoxes}/>

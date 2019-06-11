@@ -43,13 +43,20 @@ class Box extends React.Component {
                 <Link to={"/home/boxperson/" + this.props.box._id}>
                     <img src={surprise} alt=""/>
                 </Link>
-                <div className="wr-button wr-button__min">
-                    {/*TODO Убрать Link и заменить input button*/}
+                <div className="wr-button wr-button__min mb-15">
                     <Link to="/home">
                         <input type="submit" onClick={this.onLeaveBox} name="submit" value="Покинуть коробку"
                                className="button"/>
                     </Link>
                 </div>
+                {this.props.username === this.props.box.creator && (
+                    <div className="wr-button wr-button__min mt-15">
+                        <Link to={`/home/box-edit/${this.props.userId}`}>
+                            <input type="submit" name="submit" value="Редактировать"
+                                   className="button"/>
+                        </Link>
+                    </div>
+                )}
             </div>
         )
     }
@@ -58,6 +65,7 @@ class Box extends React.Component {
 function mapStateToProps(state) {
     return {
         userId: state.auth.id,
+        username: state.user.username,
         box: state.box.box,
     }
 }
