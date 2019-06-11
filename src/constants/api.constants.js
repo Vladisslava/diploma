@@ -7,7 +7,7 @@ const staticHost = devProtocol + devHost + devPort;*/
 
 const devProtocol = 'https://';
 // const devHost = '31.131.28.162'; // https://vladisslava-diploma-backend.herokuapp.com/
-const devHost = 'https://vladisslava-diploma-backend.herokuapp.com'; // https://vladisslava-diploma-backend.herokuapp.com/
+const devHost = 'vladisslava-diploma-backend.herokuapp.com'; // https://vladisslava-diploma-backend.herokuapp.com/
 const devPort = '';
 const devPrefix = '/api';
 const devBaseUrl = devProtocol + devHost + devPort + devPrefix;
