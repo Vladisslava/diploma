@@ -9,3 +9,4 @@ export const BOX_JOIN = 'BOX_JOIN';
 export const BOX_LEAVE = 'BOX_LEAVE';
 export const CREATE_BOX = 'CREATE_BOX';
 export const UPDATE_BOX = 'UPDATE_BOX';
+export const DELETE_BOX = 'UPDATE_BOX';

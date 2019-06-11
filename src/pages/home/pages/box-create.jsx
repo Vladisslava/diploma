@@ -26,7 +26,7 @@ class BoxCreate extends React.Component {
             isPrivate: this.state.isPrivate,
             password: password,
             users: [{user: this.props.userId, ward: null}],
-            description: '',
+            description: event.target.description.value,
             creator: this.props.username
         };
 
@@ -61,7 +61,11 @@ class BoxCreate extends React.Component {
                     <form onSubmit={this.onCreateBox} id="create-box-form" action="">
                         <label className="profile_input">
                             <span>Название</span>
-                            <input type="text" name="name" placeholder="name"/>
+                            <input type="text" name="name"/>
+                        </label>
+                        <label className="profile_input">
+                            <span>Описание</span>
+                            <input type="text" name="description"/>
                         </label>
                         <label className="profile_input">
                             <span>Дата события</span>

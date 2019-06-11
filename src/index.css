@@ -804,8 +804,8 @@ a:hover {
 }
 
 .wr-box__description {
+    text-align: center;
     margin-bottom: 30px;
-    text-align: justify;
 }
 
 .wr-search {

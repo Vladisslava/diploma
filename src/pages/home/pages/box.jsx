@@ -51,7 +51,7 @@ class Box extends React.Component {
                 </div>
                 {this.props.username === this.props.box.creator && (
                     <div className="wr-button wr-button__min mt-15">
-                        <Link to={`/home/box-edit/${this.props.userId}`}>
+                        <Link to={`/home/box-edit/${this.props.box._id}`}>
                             <input type="submit" name="submit" value="Редактировать"
                                    className="button"/>
                         </Link>

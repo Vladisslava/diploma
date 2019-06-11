@@ -30,6 +30,20 @@ export default function (state = initialState, {type, payload}) {
         case boxesActionConstants.GET_WARD:
             newState = {...state, ward: payload};
             break;
+        case boxesActionConstants.UPDATE_BOX:
+            newState = {
+                ...state,
+                boxes: state.boxes.map(item => item._id === payload._id ? payload : item),
+                box: payload
+            };
+            break;
+        case boxesActionConstants.DELETE_BOX:
+            newState = {
+                ...state,
+                boxes: state.boxes.filter(item => item._id !== payload),
+                box: null,
+            };
+            break;
         case boxesActionConstants.SET_BOXES:
             newState = {
                 ...state,

@@ -122,6 +122,17 @@ export function updateBox(payload) {
     };
 }
 
+export function deleteBox(id) {
+    return async dispatch => {
+        await request.delete(`${apiConstants.box}/${id}`);
+
+        dispatch({
+            type: boxesActionConstants.DELETE_BOX,
+            payload: id
+        })
+    }
+}
+
 export function joinTheBox(data) {
     return async (dispatch) => {
         try {
